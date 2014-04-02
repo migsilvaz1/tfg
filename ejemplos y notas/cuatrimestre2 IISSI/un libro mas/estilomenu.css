@@ -1,0 +1,17 @@
+#menu { height:350px; width:150px; position:relative; background-color: #990000; -moz-border-radius:10px; -webkit-border-radius:10px;}
+#nav { margin:0px; padding:0px; position:absolute; top: 70px; display:block;}
+#nav > li { list-style-type:none; display:block; margin:0px 10px; position:relative; padding:10px; width:100px;}
+#nav > li:hover ul { display:block; }
+#nav > li:hover { background-color:#CC6633; -moz-border-radius:10px; -webkit-border-radius:10px;}
+#nav li ul { margin:0px; padding:0px; display:none;}
+#nav li ul li { list-style-type:none; margin:10px 0 0 0;}
+#nav li ul li a { display:block; padding:5px 10px; color:#FFFFCC; text-decoration:none; font-size: 14px;}
+#nav li ul li:hover a { background-color:#990000; -moz-border-radius:5px; -webkit-border-radius:5px; font-size: 14px;}
+#nav li span { cursor:pointer; margin:0px 10px; font-weight:bold; color: #FFFFCC;}
+body{background: #CCCC99; font: italic small-caps 200 18px serif;}
+button{
+	width: 75px;
+}
+#info, #inicio{
+	display: table-cell;
+}

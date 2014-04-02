@@ -1,0 +1,69 @@
+-- Tablas
+CREATE TABLE radiologos (id_radiologo int NOT NULL PRIMARY KEY AUTO_INCREMENT, nombre varchar(100) NOT NULL);
+CREATE TABLE pacientes (numeroHistorial int NOT NULL PRIMARY KEY, nombre varchar(100) NOT NULL, fechaNacimiento DATE NOT NULL, sexo char (1), enfermedadesConocidas varchar(500), edad int, edadConsulta int);
+CREATE TABLE factoresDeRiesgo (id_factor int NOT NULL PRIMARY KEY AUTO_INCREMENT, nombre varchar(100) NOT NULL);
+CREATE TABLE materiales (id_material int NOT NULL PRIMARY KEY AUTO_INCREMENT, nombre varchar(100) NOT NULL);
+CREATE TABLE servicios (id_servicio int NOT NULL PRIMARY KEY AUTO_INCREMENT, nombre varchar(100) NOT NULL);
+CREATE TABLE centros (id_centro int NOT NULL PRIMARY KEY AUTO_INCREMENT, nombre varchar(100) NOT NULL);
+CREATE TABLE patologias (id_patologia int NOT NULL PRIMARY KEY AUTO_INCREMENT, nombre varchar(100) NOT NULL, numeroHistorial int NOT NULL, id_servicio int NOT NULL, id_centro int NOT NULL, FOREIGN KEY (numeroHistorial) REFERENCES pacientes(numeroHistorial) ON DELETE CASCADE, FOREIGN KEY (id_servicio) REFERENCES servicios(id_servicio) ON DELETE CASCADE, FOREIGN KEY (id_centro) REFERENCES centros(id_centro) ON DELETE CASCADE);
+CREATE TABLE diagnosticos (id_diagnostico int NOT NULL PRIMARY KEY AUTO_INCREMENT, nombre varchar(100) NOT NULL, id_patologia int NOT NULL, FOREIGN KEY (id_patologia) REFERENCES patologias(id_patologia) ON DELETE CASCADE);
+CREATE TABLE pruebasDiagnosticas (id_pdiagnostica int NOT NULL PRIMARY KEY AUTO_INCREMENT, nombre varchar(100) NOT NULL, id_patologia int, id_radiologo int, FOREIGN KEY (id_patologia) REFERENCES patologias(id_patologia) ON DELETE CASCADE, FOREIGN KEY (id_radiologo) REFERENCES radiologos(id_radiologo) ON DELETE CASCADE);
+CREATE TABLE evoluciones (id_evolucion int NOT NULL PRIMARY KEY AUTO_INCREMENT, resultado varchar(100), notas VARCHAR (500));
+CREATE TABLE complicaciones (id_complicacion int NOT NULL PRIMARY KEY AUTO_INCREMENT, nombre varchar(100) NOT NULL, mortalidadTemprana char(1), mortalidadTardia char(1));
+CREATE TABLE procedimientos (id_procedimiento int NOT NULL PRIMARY KEY AUTO_INCREMENT, nombre varchar(100) NOT NULL, id_evolucion int, FOREIGN KEY (id_evolucion) REFERENCES evoluciones(id_evolucion) ON DELETE CASCADE);
+CREATE TABLE imagenes (id_imagen int NOT NULL PRIMARY KEY AUTO_INCREMENT, image_name varchar(25) NOT NULL, image BLOB NOT NULL, numeroHistorial int NOT NULL, FOREIGN KEY (numeroHistorial) REFERENCES pacientes(numeroHistorial) ON DELETE CASCADE);
+CREATE TABLE relProcedimietnoMaterial (id_procedimiento int NOT NULL, id_material int NOT NULL, PRIMARY KEY (id_procedimiento,id_material), FOREIGN KEY (id_procedimiento) REFERENCES procedimientos(id_procedimiento) ON DELETE CASCADE, FOREIGN KEY (id_material) REFERENCES materiales(id_material) ON DELETE CASCADE);
+CREATE TABLE relPatologiaProcedimiento (id_patologia int NOT NULL, id_procedimiento int NOT NULL, PRIMARY KEY(id_patologia,id_procedimiento),FOREIGN KEY (id_procedimiento) REFERENCES procedimientos(id_procedimiento) ON DELETE CASCADE, FOREIGN KEY (id_patologia) REFERENCES patologias(id_patologia) ON DELETE CASCADE);
+CREATE TABLE relComplicacionProcedimiento (id_procedimiento int NOT NULL, id_complicacion int NOT NULL, PRIMARY KEY(id_procedimiento,id_complicacion),FOREIGN KEY (id_procedimiento) REFERENCES procedimientos(id_procedimiento) ON DELETE CASCADE, FOREIGN KEY (id_complicacion) REFERENCES complicaciones(id_complicacion) ON DELETE CASCADE);
+CREATE TABLE relPacienteFactor (numeroHistorial int NOT NULL, id_factor int NOT NULL, PRIMARY KEY (numeroHistorial,id_factor), FOREIGN KEY (numeroHistorial) REFERENCES pacientes(numeroHistorial) ON DELETE CASCADE, FOREIGN KEY (id_factor) REFERENCES factoresDeRiesgo(id_factor) ON DELETE CASCADE);
+
+
+-- Insert de ejemplo
+INSERT INTO radiologos VALUES(NULL,'john Doe');
+INSERT INTO pacientes VALUES(1,'Mr james','2014-01-01','H','Ninguna enfermedad',32,32);
+INSERT INTO materiales VALUES(NULL,'Ejemplo Material');
+INSERT INTO servicios VALUES(NULL,'Ejemplo Servicio');
+INSERT INTO centros VALUES(NULL,'Ejemplo Centro');
+INSERT INTO evoluciones VALUES(NULL,'Ejemplo Resultado','Ejemplo Notas');
+INSERT INTO complicaciones VALUES(NULL,'Ejemplo Complicacion','N','N');
+INSERT INTO factoresDeRiesgo VALUES(NULL, 'Fumador');
+
+-- PACIENTE SERVICIO Y CENTRO
+SET @last_id_paciente := (SELECT DISTINCT LAST_INSERT_ID() FROM pacientes);
+SET @last_id_servicio := (SELECT DISTINCT LAST_INSERT_ID() FROM servicios);
+SET @last_id_centro := (SELECT DISTINCT LAST_INSERT_ID() FROM centros);
+INSERT INTO patologias VALUES(NULL,'Ejemplo Patologia',@last_id_paciente,@last_id_servicio,@last_id_centro);
+
+-- PATOLOGIA
+SET @last_id_patologia := (SELECT DISTINCT LAST_INSERT_ID() FROM patologias);
+INSERT INTO diagnosticos VALUES(NULL,'Ejemplo Diagnostico',@last_id_patologia);
+
+-- PATOLOGIA
+SET @last_id_patologia := (SELECT DISTINCT LAST_INSERT_ID() FROM patologias);
+SET @last_id_radiologo := (SELECT DISTINCT LAST_INSERT_ID() FROM radiologos);
+INSERT INTO pruebasDiagnosticas VALUES(NULL,'Ejemplo Pdiagn', @last_id_patologia, @last_id_radiologo);
+
+-- EVOLUCION
+SET @last_id_evolucion := (SELECT DISTINCT LAST_INSERT_ID() FROM evoluciones);
+INSERT INTO procedimientos VALUES(NULL,'Ejemplo Procedimiento',@last_id_evolucion);
+
+-- PROCEDIMIENTO MATERIAL
+SET @last_id_procedimiento := (SELECT DISTINCT LAST_INSERT_ID() FROM procedimientos);
+SET @last_id_materiales := (SELECT DISTINCT LAST_INSERT_ID() FROM materiales);
+INSERT INTO relProcedimietnoMaterial VALUES(@last_id_procedimiento,@last_id_materiales);
+
+-- PATOLOGIA PROCEDIMIENTO
+SET @last_id_patologia := (SELECT DISTINCT LAST_INSERT_ID() FROM patologias);
+SET @last_id_procedimiento := (SELECT DISTINCT LAST_INSERT_ID() FROM procedimientos);
+INSERT INTO relPatologiaProcedimiento VALUES(@last_id_patologia,@last_id_procedimiento);
+
+-- PROCEDIMIENTO COMPLICACION
+SET @last_id_procedimiento := (SELECT DISTINCT LAST_INSERT_ID() FROM procedimientos);
+SET @last_id_complicacion := (SELECT DISTINCT LAST_INSERT_ID() FROM complicaciones);
+INSERT INTO relComplicacionProcedimiento VALUES(@last_id_procedimiento,@last_id_complicacion);
+
+-- PACIENTE FACTOR
+SET @last_numero_historial := (SELECT DISTINCT LAST_INSERT_ID() FROM pacientes);
+SET @last_id_factor := (SELECT DISTINCT LAST_INSERT_ID() FROM factoresDeRiesgo);
+INSERT INTO relPacienteFactor VALUES(@last_numero_historial,@last_id_factor);
+

@@ -1,0 +1,60 @@
+body{background: #CCCC99; font: italic 16px serif;}
+#texto1, #texto2, #texto{
+	font-family: sans-serif;
+	font-size:18px; 
+	color: #990000;
+}
+#datosVenta{
+	border:3px solid #990000;
+	background:#CC6633;
+	font-weight: bold;
+	padding: 15px;
+	width: 800px;
+	height: 100px;
+}
+#envoltura {
+    display:table;
+}
+         
+#contenido {
+    display:table-row;
+}
+         
+#grupo1, #grupo2, #grupo3{
+    display:table-cell;
+    padding:10px;
+}
+#socio, #codigo, #fecha, #total, #pagado{
+	float:right;
+	margin-left:5px;
+}
+label, select{
+	float:left;
+	clear:right;
+}
+#tabla {
+	font-size: 18px;
+	background-color: #CC6633;
+	text-align: center;
+	border-style: solid;
+	border-color: #990000;
+	font-family: Trebuchet MS, Arial;
+	padding: 10px;
+}
+th, td{
+	border-collapse:collapse;
+	border: 1px solid #990000;
+}
+#botones{
+	float:right;
+}
+#limpiar{
+	float:left;
+	margin-right:5px;
+}
+#continuar{
+	float:left
+}
+#tabla, #texto1,#texto2, #datosVenta{
+	margin-left: 30px;
+}

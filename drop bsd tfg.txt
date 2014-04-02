@@ -1,0 +1,17 @@
+DROP TABLE relProcedimietnoMaterial;
+DROP TABLE relPatologiaProcedimiento;
+DROP TABLE relComplicacionProcedimiento;
+DROP TABLE relPacienteFactor;
+DROP TABLE factoresDeRiesgo;
+DROP TABLE pruebasDiagnosticas;
+DROP TABLE complicaciones;
+DROP TABLE imagenes;
+DROP TABLE radiologos;
+DROP TABLE materiales;
+DROP TABLE procedimientos;
+DROP TABLE evoluciones;
+DROP TABLE diagnosticos;
+DROP TABLE patologias;
+DROP TABLE pacientes;
+DROP TABLE servicios;
+DROP TABLE centros;

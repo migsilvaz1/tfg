@@ -1,0 +1,54 @@
+body{background: #CCCC99; font: italic 16px serif;}
+#intro, #texto{
+	font-family: sans-serif;
+	font-size:18px; 
+	color: #990000;
+}
+#datos{
+	border:3px solid #990000;
+	float:left;
+	margin-left: 30px;
+	background:#CC6633;
+	font-weight: bold;
+	padding: 15px;
+}
+#envoltura {
+    display:table;
+}
+         
+#contenido {
+    display:table-row;
+}
+         
+#grupo1, #grupo2, #grupo3 {
+    display:table-cell;
+    padding:10px;
+}
+#nombre, #sexo, #edad, #telefono, #correo, #direccion, #vip, #fechaNacimiento, #fechaIngreso, #fechaFinSancion{
+	float:right;
+	margin-left:5px;
+}
+label, select{
+	float:left;
+	clear:right;
+}
+#botones{
+	float:right;
+}
+#limpiar{
+	float:left;
+	margin-right:5px;
+}
+#crear{
+	float:left
+}
+#masculino, #femenino{
+	float:right;
+	clear:both;
+}
+#femenino{
+	margin-right:2px;
+}
+#vip{
+	margin-right:139px;
+}
