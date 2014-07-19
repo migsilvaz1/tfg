@@ -1,11 +1,12 @@
 from Persistence.DBCon import connection
+from Persistence.Domain.Centro import *
 
 
-def readallimagenes():
+def get_all():
     cnx = connection.dbconnect()
     result = []
     cursor = cnx.cursor(buffered=True)
-    query = ("SELECT * FROM imagenes")
+    query = ("SELECT * FROM centros")
     cursor.execute(query)
     connection.dbdisconect(cnx)
     for (id_centro, nombre) in cursor:
@@ -13,7 +14,7 @@ def readallimagenes():
     return result
 
 
-def readcentrobyid(identificator):
+def get_by_id(identificator):
     cnx = connection.dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("SELECT * FROM centros WHERE id_centro = '%d'" % identificator)
@@ -23,7 +24,7 @@ def readcentrobyid(identificator):
     return Centro(row[0], row[1])
 
 
-def createcentro(nombre):
+def create(nombre):
     cnx = connection.dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("INSERT INTO centros VALUES(NULL,'%s')" % nombre)
@@ -32,7 +33,7 @@ def createcentro(nombre):
     connection.dbdisconect(cnx)
 
 
-def updatecentro(identificator, nombre):
+def update(identificator, nombre):
     cnx = connection.dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("UPDATE centros SET nombre = '%s' WHERE id_centro = '%d'" % (nombre, identificator))
@@ -41,12 +42,9 @@ def updatecentro(identificator, nombre):
     connection.dbdisconect(cnx)
 
 
-def deletecentro(identificator):
+def delete(identificator):
     cnx = connection.dbconnect()
     cursor = cnx.cursor(buffered=True)
-    query = ("UPDATE patologias SET id_centro = 0, WHERE id_centro = '%d'" % identificator)
-    cursor.execute(query)
-    cnx.commit()
     query = ("DELETE FROM centros WHERE id_centro = '%d'" % identificator)
     cursor.execute(query)
     cnx.commit()

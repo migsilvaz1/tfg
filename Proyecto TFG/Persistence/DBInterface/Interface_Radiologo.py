@@ -2,7 +2,7 @@ from Persistence.DBCon.connection import *
 from Persistence.Domain.Radiologo import *
 
 
-def readallradiologos():
+def get_all():
     cnx = dbconnect()
     result = []
     cursor = cnx.cursor(buffered=True)
@@ -14,7 +14,7 @@ def readallradiologos():
     return result
 
 
-def readradiologobyid(identificator):
+def get_by_id(identificator):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("SELECT * FROM radiologos WHERE id_radiologo = '%d'" % identificator)
@@ -24,7 +24,7 @@ def readradiologobyid(identificator):
     return Radiologo(row[0], row[1])
 
 
-def createradiologo(nombre):
+def create(nombre):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("INSERT INTO radiologos VALUES(NULL,'%s')" % nombre)
@@ -33,7 +33,7 @@ def createradiologo(nombre):
     dbdisconect(cnx)
 
 
-def updateradiologo(identificator, nombre):
+def update(identificator, nombre):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("UPDATE radiologos SET nombre = '%s' WHERE id_radiologo = '%d'" % (nombre, identificator))
@@ -42,12 +42,9 @@ def updateradiologo(identificator, nombre):
     dbdisconect(cnx)
 
 
-def deleteradiologo(identificator):
+def delete(identificator):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
-    query = ("DELETE FROM pruebasDiagnosticas WHERE id_radiologo = '%d'" % identificator)
-    cursor.execute(query)
-    cnx.commit()
     query = ("DELETE FROM radiologos WHERE id_radiologo = '%d'" % identificator)
     cursor.execute(query)
     cnx.commit()

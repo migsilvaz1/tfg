@@ -2,7 +2,7 @@ from Persistence.DBCon.connection import *
 from Persistence.Domain.Diagnostico import *
 
 
-def readalldiagnosticos():
+def get_all():
     cnx = dbconnect()
     result = []
     cursor = cnx.cursor(buffered=True)
@@ -14,7 +14,7 @@ def readalldiagnosticos():
     return result
 
 
-def readdiagnosticobyid(identificator):
+def get_by_id(identificator):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("SELECT * FROM diagnosticos WHERE id_diagnostico = '%d'" % identificator)
@@ -24,7 +24,7 @@ def readdiagnosticobyid(identificator):
     return Diagnostico(row[0], row[1], row[2])
 
 
-def creatediagnostico(nombre, patologia):
+def create(nombre, patologia):
     id_patologia = patologia.id
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
@@ -34,7 +34,7 @@ def creatediagnostico(nombre, patologia):
     dbdisconect(cnx)
 
 
-def updatediagnostico(identificator, nombre, patologia):
+def update(identificator, nombre, patologia):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("UPDATE diagnosticos SET nombre = '%s', id_patologia = '%d' WHERE id_diagnostico = '%d'"
@@ -44,10 +44,11 @@ def updatediagnostico(identificator, nombre, patologia):
     dbdisconect(cnx)
 
 
-def deletediagnostico(identificator):
+def delete(identificator):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("DELETE FROM diagnosticos WHERE id_diagnostico = '%d'" % identificator)
     cursor.execute(query)
     cnx.commit()
     dbdisconect(cnx)
+

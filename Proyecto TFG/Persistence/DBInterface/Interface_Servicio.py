@@ -2,7 +2,7 @@ from Persistence.DBCon.connection import *
 from Persistence.Domain.Servicio import *
 
 
-def readallservicios():
+def get_all():
     cnx = dbconnect()
     result = []
     cursor = cnx.cursor(buffered=True)
@@ -14,7 +14,7 @@ def readallservicios():
     return result
 
 
-def readserviciobyid(identificator):
+def get_by_id(identificator):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("SELECT * FROM servicios WHERE id_servicio = '%d'" % identificator)
@@ -24,7 +24,7 @@ def readserviciobyid(identificator):
     return Servicio(row[0], row[1])
 
 
-def createservicio(nombre):
+def create(nombre):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("INSERT INTO servicios VALUES(NULL,'%s')" % nombre)
@@ -33,7 +33,7 @@ def createservicio(nombre):
     dbdisconect(cnx)
 
 
-def updateservicio(identificator, nombre):
+def update(identificator, nombre):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("UPDATE servicios SET nombre = '%s' WHERE id_servicio = '%d'" % (nombre, identificator))
@@ -42,13 +42,11 @@ def updateservicio(identificator, nombre):
     dbdisconect(cnx)
 
 
-def deleteservicio(identificator):
+def delete(identificator):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
-    query = ("UPDATE patologias SET id_servicio = 0, WHERE id_patologia = '%d'" % identificator)
-    cursor.execute(query)
-    cnx.commit()
     query = ("DELETE FROM servicios WHERE id_servicio = '%d'" % identificator)
     cursor.execute(query)
     cnx.commit()
     dbdisconect(cnx)
+

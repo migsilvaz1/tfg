@@ -2,7 +2,7 @@ from Persistence.DBCon import connection
 from Persistence.Domain.Factor import *
 
 
-def readallfactores():
+def get_all():
     cnx = connection.dbconnect()
     result = []
     cursor = cnx.cursor(buffered=True)
@@ -14,7 +14,7 @@ def readallfactores():
     return result
 
 
-def readfactorbyid(identificator):
+def get_by_id(identificator):
     cnx = connection.dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("SELECT * FROM factoresDeRiesgo WHERE id_factor = '%d'" % identificator)
@@ -24,7 +24,7 @@ def readfactorbyid(identificator):
     return Factor(row[0], row[1])
 
 
-def createfactor(nombre):
+def create(nombre):
     cnx = connection.dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("INSERT INTO factoresDeRiesgo VALUES(NULL,'%s')" % nombre)
@@ -33,7 +33,7 @@ def createfactor(nombre):
     connection.dbdisconect(cnx)
 
 
-def updatefactor(identificator, nombre):
+def update(identificator, nombre):
     cnx = connection.dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("UPDATE factoresDeRiesgo SET nombre = '%s' WHERE id_factor = '%d'" % (nombre, identificator))
@@ -42,13 +42,10 @@ def updatefactor(identificator, nombre):
     connection.dbdisconect(cnx)
 
 
-def deletefactor(identificator):
+def delete(identificator):
     cnx = connection.dbconnect()
     cursor = cnx.cursor(buffered=True)
-    query = (DELETE FROM relPacienteFactor
-    cursor.execute(query)
-    cnx.commit()
-    query = ("DELETE FROM centros WHERE id_centro = '%d'" % identificator)
+    query = ("DELETE FROM factoresDeRiesgo WHERE id_factor = '%d'" % identificator)
     cursor.execute(query)
     cnx.commit()
     connection.dbdisconect(cnx)

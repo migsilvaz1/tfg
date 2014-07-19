@@ -1,11 +1,8 @@
 from Persistence.DBCon.connection import *
 from Persistence.Domain.Procedimiento import *
-import complicacionMethods
-import materialMethods
-import relationMethods
-import evolucionMethods
 
-def readallprocedimientos():
+
+def get_all():
     cnx = dbconnect()
     result = []
     cursor = cnx.cursor(buffered=True)
@@ -17,7 +14,7 @@ def readallprocedimientos():
     return result
 
 
-def readprocedimientobyid(identificator):
+def get_by_id(identificator):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("SELECT * FROM procedimientos WHERE id_procedimiento = '%d'" % identificator)
@@ -27,7 +24,7 @@ def readprocedimientobyid(identificator):
     return Procedimiento(row[0], row[1], row[2])
 
 
-def createprocedimiento(nombre, evolucion):
+def create(nombre, evolucion):
     id_evolucion = evolucion.id
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
@@ -37,7 +34,7 @@ def createprocedimiento(nombre, evolucion):
     dbdisconect(cnx)
 
 
-def updateprocedimiento(identificator, nombre, evolucion):
+def update(identificator, nombre, evolucion):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("UPDATE procedimientos SET nombre = '%s', id_evolucion = '%s' WHERE id_procedimiento = '%d'"
@@ -47,21 +44,7 @@ def updateprocedimiento(identificator, nombre, evolucion):
     dbdisconect(cnx)
 
 
-def deleteprocedimiento(identificator):
-    procedimiento = readprocedimientobyid(identificator)
-    #borrar los materiales
-    materiales = relationMethods.readallmat_from_prod(identificator)
-    for m in materiales:
-        materialMethods.deletematerial(m.id)
-    #Borrar la evolucion
-    evolucionMethods.deleteevolucion(procedimiento.idevolucion)
-    #Borrar las complicaciones
-    complicaciones = relationMethods.readallcom_from_prod(identificator)
-    for c in complicaciones:
-        complicacionMethods.deletecomplicacion(c.id)
-    #Borrar las relaciones con patologias
-    relationMethods.deleterelpatprod_byprod(procedimiento)
-    #Borrar el procedimiento
+def delete(identificator):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("DELETE FROM procedimientos WHERE id_procedimiento = '%d'" % identificator)

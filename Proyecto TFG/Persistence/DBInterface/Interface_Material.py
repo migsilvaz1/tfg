@@ -1,9 +1,8 @@
 from Persistence.DBCon.connection import *
 from Persistence.Domain.Material import *
-from Persistence.dbmethods.relationMethods import *
 
 
-def readallmateriales():
+def get_all():
     cnx = dbconnect()
     result = []
     cursor = cnx.cursor(buffered=True)
@@ -15,7 +14,7 @@ def readallmateriales():
     return result
 
 
-def readmaterialbyid(identificator):
+def get_by_id(identificator):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("SELECT * FROM materiales WHERE id_material = '%d'" % identificator)
@@ -25,7 +24,7 @@ def readmaterialbyid(identificator):
     return Material(row[0], row[1])
 
 
-def creatematerial(nombre):
+def create(nombre):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("INSERT INTO materiales VALUES(NULL,'%s')" % nombre)
@@ -34,7 +33,7 @@ def creatematerial(nombre):
     dbdisconect(cnx)
 
 
-def updatematerial(identificator, nombre):
+def update(identificator, nombre):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("UPDATE materiales SET nombre = '%s' WHERE id_material = '%d'" % (nombre, identificator))
@@ -43,14 +42,10 @@ def updatematerial(identificator, nombre):
     dbdisconect(cnx)
 
 
-def deletematerial(identificator):
-    #borrar las relaciones en las que aparece el material
-    material = readmaterialbyid(identificator)
-    deleterelprocmat_bymat(material)
-    #borrar el material
-    cnx = connection.dbconnect()
+def delete(identificator):
+    cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("DELETE FROM materiales WHERE id_material = '%d'" % identificator)
     cursor.execute(query)
     cnx.commit()
-    connection.dbdisconect(cnx)
+    dbdisconect(cnx)

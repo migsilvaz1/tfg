@@ -1,9 +1,8 @@
 from Persistence.DBCon.connection import *
 from Persistence.Domain.Complicacion import *
-from Persistence.dbmethods.relationMethods import *
 
 
-def readallcomplicaciones():
+def get_all():
     cnx = dbconnect()
     result = []
     cursor = cnx.cursor(buffered=True)
@@ -15,7 +14,7 @@ def readallcomplicaciones():
     return result
 
 
-def readcomplicacionbyid(identificator):
+def get_by_id(identificator):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("SELECT * FROM complicaciones WHERE id_complicacion = '%d'" % identificator)
@@ -25,7 +24,7 @@ def readcomplicacionbyid(identificator):
     return Complicacion(row[0], row[1], row[2], row[3])
 
 
-def createcomplicacion(nombre, mortalidadTemprana, mortalidadTardia):
+def create(nombre, mortalidadTemprana, mortalidadTardia):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("INSERT INTO complicaciones VALUES(NULL,'%s','%c','%c')" % (nombre, mortalidadTemprana, mortalidadTardia))
@@ -34,7 +33,7 @@ def createcomplicacion(nombre, mortalidadTemprana, mortalidadTardia):
     dbdisconect(cnx)
 
 
-def updatecomplicacion(identificator, nombre, mortalidadTemprana, mortalidadTardia):
+def update(identificator, nombre, mortalidadTemprana, mortalidadTardia):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("UPDATE complicaciones SET nombre = '%s', mortalidadTemprana = '%c', mortalidadTardia = '%c'"
@@ -44,14 +43,10 @@ def updatecomplicacion(identificator, nombre, mortalidadTemprana, mortalidadTard
     dbdisconect(cnx)
 
 
-def deletecomplicacion(identificator):
-    #borrar las relaciones en las que aparece la complicacion
-    complicacion = readcomplicacionbyid(identificator)
-    deleterelcompro_bycom(complicacion)
-    #borrar la complicacion
-    cnx = connection.dbconnect()
+def delete(identificator):
+    cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("DELETE FROM complicaciones WHERE id_complicacion = '%d'" % identificator)
     cursor.execute(query)
     cnx.commit()
-    connection.dbdisconect(cnx)
+    dbdisconect(cnx)

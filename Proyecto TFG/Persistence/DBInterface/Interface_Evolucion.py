@@ -2,7 +2,7 @@ from Persistence.DBCon.connection import *
 from Persistence.Domain.Evolucion import *
 
 
-def readallevoluciones():
+def get_all():
     cnx = dbconnect()
     result = []
     cursor = cnx.cursor(buffered=True)
@@ -14,7 +14,7 @@ def readallevoluciones():
     return result
 
 
-def readevolucionbyid(identificator):
+def get_by_id(identificator):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("SELECT * FROM evoluciones WHERE id_evolucion = '%d'" % identificator)
@@ -24,7 +24,7 @@ def readevolucionbyid(identificator):
     return Evolucion(row[0], row[1], row[2])
 
 
-def createevolucion(resultado, notas):
+def create(resultado, notas):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("INSERT INTO evoluciones VALUES(NULL,'%s','%s')" % (resultado, notas))
@@ -33,7 +33,7 @@ def createevolucion(resultado, notas):
     dbdisconect(cnx)
 
 
-def updateevolucion(identificator, nombre, notas):
+def update(identificator, nombre, notas):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("UPDATE evoluciones SET nombre = '%s', notas = '%s' WHERE id_evolucion = '%d'" % (nombre, identificator,
@@ -43,14 +43,9 @@ def updateevolucion(identificator, nombre, notas):
     dbdisconect(cnx)
 
 
-def deleteevolucion(identificator):
-    #Quitar del procedimientos esta evolucion
+def delete(identificator):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
-    query = ("UPDATE procedimientos SET id_evolucion = 0 WHERE id_evolucion = '%d'" % identificator)
-    cursor.execute(query)
-    cnx.commit()
-    #eliminar la evolucion
     query = ("DELETE FROM evoluciones WHERE id_evolucion = '%d'" % identificator)
     cursor.execute(query)
     cnx.commit()
