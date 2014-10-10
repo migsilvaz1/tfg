@@ -9,48 +9,56 @@ def get_all():
     query = ("SELECT * FROM patologias")
     cursor.execute(query)
     dbdisconect(cnx)
-    for (id_patologia, nombre, numeroHistorial, id_servicio, id_centro) in cursor:
-        result.append(Patologia(id_patologia, nombre, numeroHistorial, id_servicio, id_centro))
+    for (id_patologia, nombre) in cursor:
+        result.append(Patologia(id_patologia, nombre))
     return result
 
 
-def get_by_id(identificator):
+def get_by_id(ide):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
-    query = ("SELECT * FROM patologias WHERE id_patologia = '%d'" % identificator)
+    query = ("SELECT * FROM patologias WHERE id_patologia = '%d'" % ide)
     cursor.execute(query)
     row = cursor.fetchone()
     dbdisconect(cnx)
-    return Patologia(row[0], row[1], row[2], row[3], row[4])
+    return Patologia(row[0], row[1])
 
 
-def create(nombre, paciente, servicio, centro):
-    numeroHistorial = paciente.numerohistorial
-    id_servicio = servicio.id
-    id_centro = centro.id
+def create(patologia):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
-    query = ("INSERT INTO patologias VALUES(NULL,'%s','%d','%d','%d')" % (nombre, numeroHistorial, id_servicio,
-                                                                          id_centro))
+    query = ("INSERT INTO patologias VALUES(NULL,'%s')" % patologia.nombre)
     cursor.execute(query)
     cnx.commit()
     dbdisconect(cnx)
 
 
-def update(identificator, nombre, numeroHistorial, id_servicio, id_centro):
+def update(patologia):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
-    query = ("UPDATE patologias SET nombre = '%s', numeroHistorial = '%d', id_servicio = '%d', id_centro = '%d' "
-             "WHERE id_patologia = '%d'" % (nombre, numeroHistorial, id_servicio, id_centro, identificator))
+    query = ("UPDATE patologias SET nombre = '%s' WHERE id_patologia = '%d'" % (patologia.nombre, patologia.id))
     cursor.execute(query)
     cnx.commit()
     dbdisconect(cnx)
 
 
-def delete(identificator):
+def delete(patologia):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
-    query = ("DELETE FROM patologias WHERE id_patologia = '%d'" % identificator)
+    query = ("DELETE FROM patologias WHERE id_patologia = '%d'" % patologia.id)
     cursor.execute(query)
     cnx.commit()
     dbdisconect(cnx)
+
+
+def get_by_name(nombre):
+    text = "%"+nombre+"%"
+    result = []
+    cnx = dbconnect()
+    cursor = cnx.cursor(buffered=True)
+    query = ("SELECT * FROM patologias WHERE nombre LIKE '%s'" % text)
+    cursor.execute(query)
+    dbdisconect(cnx)
+    for (id_patologia, nombre) in cursor:
+        result.append(Patologia(id_patologia, nombre))
+    return result

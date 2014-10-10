@@ -1,52 +1,64 @@
-from Persistence.DBCon import connection
+from Persistence.DBCon.connection import *
 from Persistence.Domain.Factor import *
 
 
 def get_all():
-    cnx = connection.dbconnect()
+    cnx = dbconnect()
     result = []
     cursor = cnx.cursor(buffered=True)
     query = ("SELECT * FROM factoresDeRiesgo")
     cursor.execute(query)
-    connection.dbdisconect(cnx)
+    dbdisconect(cnx)
     for (id_factor, nombre) in cursor:
         result.append(Factor(id_factor, nombre))
     return result
 
 
-def get_by_id(identificator):
-    cnx = connection.dbconnect()
+def get_by_id(ide):
+    cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
-    query = ("SELECT * FROM factoresDeRiesgo WHERE id_factor = '%d'" % identificator)
+    query = ("SELECT * FROM factoresDeRiesgo WHERE id_factor = '%d'" % ide)
     cursor.execute(query)
     row = cursor.fetchone()
-    connection.dbdisconect(cnx)
+    dbdisconect(cnx)
     return Factor(row[0], row[1])
 
 
-def create(nombre):
-    cnx = connection.dbconnect()
+def create(factor):
+    cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
-    query = ("INSERT INTO factoresDeRiesgo VALUES(NULL,'%s')" % nombre)
+    query = ("INSERT INTO factoresDeRiesgo VALUES(NULL,'%s')" % factor.nombre)
     cursor.execute(query)
     cnx.commit()
-    connection.dbdisconect(cnx)
+    dbdisconect(cnx)
 
 
-def update(identificator, nombre):
-    cnx = connection.dbconnect()
+def update(factor):
+    cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
-    query = ("UPDATE factoresDeRiesgo SET nombre = '%s' WHERE id_factor = '%d'" % (nombre, identificator))
+    query = ("UPDATE factoresDeRiesgo SET nombre = '%s' WHERE id_factor = '%d'" % (factor.nombre, factor.id))
     cursor.execute(query)
     cnx.commit()
-    connection.dbdisconect(cnx)
+    dbdisconect(cnx)
 
 
-def delete(identificator):
-    cnx = connection.dbconnect()
+def delete(factor):
+    cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
-    query = ("DELETE FROM factoresDeRiesgo WHERE id_factor = '%d'" % identificator)
+    query = ("DELETE FROM factoresDeRiesgo WHERE id_factor = '%d'" % factor.id)
     cursor.execute(query)
     cnx.commit()
-    connection.dbdisconect(cnx)
+    dbdisconect(cnx)
 
+
+def get_by_name(nombre):
+    text = "%"+nombre+"%"
+    result = []
+    cnx = dbconnect()
+    cursor = cnx.cursor(buffered=True)
+    query = ("SELECT * FROM factoresDeRiesgo WHERE nombre LIKE '%s'" % text)
+    cursor.execute(query)
+    dbdisconect(cnx)
+    for (id_factor, nombre) in cursor:
+        result.append(Factor(id_factor, nombre))
+    return result

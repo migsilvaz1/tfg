@@ -1,0 +1,9 @@
+COSAS PARA LOS SERVICES
+string = raw_input("Introduzca una frase: ")
+assert (string != ""), "No puede estar en blanco"
+print("sigo tras el aserto")
+
+try:
+    raise NameError('HiThere')
+except NameError:
+    print 'An exception flew by!'

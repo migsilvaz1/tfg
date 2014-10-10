@@ -1,51 +1,64 @@
-from Persistence.DBCon import connection
+from Persistence.DBCon.connection import *
 from Persistence.Domain.Centro import *
 
 
 def get_all():
-    cnx = connection.dbconnect()
+    cnx = dbconnect()
     result = []
     cursor = cnx.cursor(buffered=True)
     query = ("SELECT * FROM centros")
     cursor.execute(query)
-    connection.dbdisconect(cnx)
+    dbdisconect(cnx)
     for (id_centro, nombre) in cursor:
         result.append(Centro(id_centro, nombre))
     return result
 
 
-def get_by_id(identificator):
-    cnx = connection.dbconnect()
+def get_by_id(ide):
+    cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
-    query = ("SELECT * FROM centros WHERE id_centro = '%d'" % identificator)
+    query = ("SELECT * FROM centros WHERE id_centro = '%d'" % ide)
     cursor.execute(query)
     row = cursor.fetchone()
-    connection.dbdisconect(cnx)
+    dbdisconect(cnx)
     return Centro(row[0], row[1])
 
 
-def create(nombre):
-    cnx = connection.dbconnect()
+def create(centro):
+    cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
-    query = ("INSERT INTO centros VALUES(NULL,'%s')" % nombre)
+    query = ("INSERT INTO centros VALUES(NULL,'%s')" % centro.nombre)
     cursor.execute(query)
     cnx.commit()
-    connection.dbdisconect(cnx)
+    dbdisconect(cnx)
 
 
-def update(identificator, nombre):
-    cnx = connection.dbconnect()
+def update(centro):
+    cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
-    query = ("UPDATE centros SET nombre = '%s' WHERE id_centro = '%d'" % (nombre, identificator))
+    query = ("UPDATE centros SET nombre = '%s' WHERE id_centro = '%d'" % (centro.nombre, centro.id))
     cursor.execute(query)
     cnx.commit()
-    connection.dbdisconect(cnx)
+    dbdisconect(cnx)
 
 
-def delete(identificator):
-    cnx = connection.dbconnect()
+def delete(centro):
+    cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
-    query = ("DELETE FROM centros WHERE id_centro = '%d'" % identificator)
+    query = ("DELETE FROM centros WHERE id_centro = '%d'" % centro.id)
     cursor.execute(query)
     cnx.commit()
-    connection.dbdisconect(cnx)
+    dbdisconect(cnx)
+
+
+def get_by_name(nombre):
+    text = "%"+nombre+"%"
+    result = []
+    cnx = dbconnect()
+    cursor = cnx.cursor(buffered=True)
+    query = ("SELECT * FROM centros WHERE nombre LIKE '%s'" % text)
+    cursor.execute(query)
+    dbdisconect(cnx)
+    for (id_centro, nombre) in cursor:
+        result.append(Centro(id_centro, nombre))
+    return result

@@ -64,7 +64,30 @@ def delete_complicacion_procedimiento(complicacion, procedimiento):
     id_procedimiento = procedimiento.id
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
-    query = ("DELETE FROM relComplicacionProcedimiento WHERE id_procedimiento = '%d' AND id_procedimiento = '%d'" % id_complicacion, id_procedimiento)
+    query = ("DELETE FROM relComplicacionProcedimiento WHERE id_complicacion = '%d' AND id_procedimiento = '%d'" % id_complicacion, id_procedimiento)
+    cursor.execute(query)
+    cnx.commit()
+    dbdisconect(cnx)
+
+
+#relEpisodioPdiagnostica
+def create_episodio_pdiagnostica(episodio, pdiagnostica):
+    id_episodio = episodio.id
+    id_pdiagnostica = pdiagnostica.id
+    cnx = dbconnect()
+    cursor = cnx.cursor(buffered=True)
+    query = ("INSERT INTO relEpisodioPdiagnostica VALUES('%d','%d')" % (id_episodio, id_pdiagnostica))
+    cursor.execute(query)
+    cnx.commit()
+    dbdisconect(cnx)
+
+
+def delete_episodio_pdiagnostica(episodio, pdiagnostica):
+    id_episodio = episodio.id
+    id_pdiagnostica = pdiagnostica.id
+    cnx = dbconnect()
+    cursor = cnx.cursor(buffered=True)
+    query = ("DELETE FROM relEpisodioPdiagnostica WHERE id_episodio = '%d' AND id_pdiagnostica = '%d'" % id_episodio, id_pdiagnostica)
     cursor.execute(query)
     cnx.commit()
     dbdisconect(cnx)
