@@ -24,24 +24,24 @@ def delete_procedimiento_mataterial(procedimiento, material):
     dbdisconect(cnx)
 
 
-#relPatologiaProcedimiento
-def create_patologia_procedimiento(patologia, procedimiento):
-    id_patologia = patologia.id
+#relEpisodioProcedimiento
+def create_episodio_procedimiento(episodio, procedimiento):
+    id_episodio = episodio.id
     id_procedimiento = procedimiento.id
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
-    query = ("INSERT INTO relPatologiaProcedimiento VALUES('%d','%d')" % (id_patologia, id_procedimiento))
+    query = ("INSERT INTO relEpisodioProcedimiento VALUES('%d','%d')" % (id_episodio, id_procedimiento))
     cursor.execute(query)
     cnx.commit()
     dbdisconect(cnx)
 
 
-def delete_patologia_procedimiento(patologia, procedimiento):
-    id_patologia = patologia.id
+def delete_episodio_procedimiento(episodio, procedimiento):
+    id_episodio = episodio.id
     id_procedimiento = procedimiento.id
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
-    query = ("DELETE FROM relPatologiaProcedimiento WHERE id_patologia = '%d' AND id_procedimiento = '%d'" % id_patologia, id_procedimiento)
+    query = ("DELETE FROM relEpisodioProcedimiento WHERE id_episodio = '%d' AND id_procedimiento = '%d'" % id_episodio, id_procedimiento)
     cursor.execute(query)
     cnx.commit()
     dbdisconect(cnx)

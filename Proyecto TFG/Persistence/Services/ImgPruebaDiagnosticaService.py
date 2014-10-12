@@ -10,16 +10,16 @@ def rebuild_imagen(data, path):
 
 
 def save_imagen(data, numhist):
-    BlobRepository.save_imagen(data, numhist, 'imagenes_patologia')
+    BlobRepository.save_imagen(data, numhist, 'imagenes_pdiagnostica')
 
 
 def delete_imagen(identificator):
-    BlobRepository.delete_imagen(identificator, 'imagenes_patologia')
+    BlobRepository.delete_imagen(identificator, 'imagenes_pdiagnostica')
 
 
 def getall_imagenes():
-    return BlobRepository.getall_imagenes('imagenes_patologia')
+    return BlobRepository.getall_imagenes('imagenes_pdiagnostica')
 
 
 def get_imagen_by_id(identificator):
-    return BlobRepository.get_imagen_by_id(identificator, 'imagenes_patologia')
+    return BlobRepository.get_imagen_by_id(identificator, 'imagenes_pdiagnostica')

@@ -9,8 +9,8 @@ def get_all():
     query = ("SELECT * FROM episodios")
     cursor.execute(query)
     dbdisconect(cnx)
-    for (id_patologia, nombre, id_paciente, id_servicio, id_centro, id_patologia) in cursor:
-        result.append(Episodio(id_patologia, nombre, id_paciente, id_servicio, id_centro, id_patologia))
+    for (id_episodio, nombre, id_paciente, id_servicio, id_centro, id_patologia) in cursor:
+        result.append(Episodio(id_episodio, nombre, id_paciente, id_servicio, id_centro, id_patologia))
     return result
 
 
