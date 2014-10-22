@@ -105,17 +105,18 @@ def mortalidad_temprana_patologia(patologia):
 
 
 #CUANTOS PACIENTES CON UNA PATOLOGIA Y UN PROCEDIMIENTO CONCRETOS SE HAN CURADO?
-def curacion_patologia_procedimiento(patologia, procedimiento):
+def curacion_patologia_procedimiento(patologia, tipop):
     cnx = connection.dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("SELECT count(*) FROM patologias INNER JOIN episodios ON patologias.id_patologia = episodios.id_patologia "
              "INNER JOIN relepisodioprocedimiento on episodios.id_episodio = relepisodioprocedimiento.id_episodio "
              "INNER JOIN procedimientos ON relepisodioprocedimiento.id_procedimiento = procedimientos.id_procedimiento "
-             "INNER JOIN relcomplicacionprocedimiento ON procedimientos.id_procedimiento = "
+             "INNER JOIN tipo_procedimiento ON procedimientos.id_tipop = tipo_procedimiento.id_tipop  INNER JOIN "
+             "relcomplicacionprocedimiento ON procedimientos.id_procedimiento = "
              "relcomplicacionprocedimiento.id_procedimiento INNER JOIN complicaciones ON "
              "relcomplicacionprocedimiento.id_complicacion = complicaciones.id_complicacion WHERE "
              "complicaciones.mortalidadTemprana = 'N' AND complicaciones.mortalidadTardia = 'N' AND "
-             "patologias.id_patologia = '%d' AND procedimientos.id_procedimiento = '%d'" % (patologia.id, procedimiento.id))
+             "patologias.id_patologia = '%d' AND tipo_procedimiento.id_tipop = '%d'" % (patologia.id, tipop.id))
     cursor.execute(query)
     row = cursor.fetchone()
     connection.dbdisconect(cnx)

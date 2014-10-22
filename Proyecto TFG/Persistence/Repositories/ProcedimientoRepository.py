@@ -9,8 +9,8 @@ def get_all():
     query = ("SELECT * FROM procedimientos")
     cursor.execute(query)
     dbdisconect(cnx)
-    for (id_procedimiento, nombre, id_evolucion) in cursor:
-        result.append(Procedimiento(id_procedimiento, nombre, id_evolucion))
+    for (id_procedimiento, idtipop, id_evolucion) in cursor:
+        result.append(Procedimiento(id_procedimiento, idtipop, id_evolucion))
     return result
 
 
@@ -27,7 +27,7 @@ def get_by_id(ide):
 def create(procedimiento):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
-    query = ("INSERT INTO procedimientos VALUES(NULL,'%s','%d')" % (procedimiento.nombre, procedimiento.idevolucion))
+    query = ("INSERT INTO procedimientos VALUES(NULL,'%d','%d')" % (procedimiento.idtipop, procedimiento.idevolucion))
     cursor.execute(query)
     cnx.commit()
     dbdisconect(cnx)
@@ -36,8 +36,8 @@ def create(procedimiento):
 def update(procedimiento):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
-    query = ("UPDATE procedimientos SET nombre = '%s', id_evolucion = '%s' WHERE id_procedimiento = '%d'"
-             % (procedimiento.nombre, procedimiento.idevolucion, procedimiento.id))
+    query = ("UPDATE procedimientos SET id_tipop = '%d', id_evolucion = '%s' WHERE id_procedimiento = '%d'"
+             % (procedimiento.idtipop, procedimiento.idevolucion, procedimiento.id))
     cursor.execute(query)
     cnx.commit()
     dbdisconect(cnx)
@@ -60,6 +60,6 @@ def get_by_name(nombre):
     query = ("SELECT * FROM procedimientos WHERE nombre LIKE '%s'" % text)
     cursor.execute(query)
     dbdisconect(cnx)
-    for (id_procedimiento, nombre, id_evolucion) in cursor:
-        result.append(Procedimiento(id_procedimiento, nombre, id_evolucion))
+    for (id_procedimiento, idtipop, id_evolucion) in cursor:
+        result.append(Procedimiento(id_procedimiento, idtipop, id_evolucion))
     return result

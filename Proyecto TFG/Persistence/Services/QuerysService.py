@@ -1,5 +1,5 @@
 from Persistence.Repositories import QuerysRepository
-from Persistence.Domain import Patologia, Procedimiento
+from Persistence.Domain import Patologia, TipoProcedimiento
 
 
 #QUE PORCENTAJE DE UNA PATOLOGIA A HA PRESENTADO COMPLICACIONES?
@@ -41,9 +41,9 @@ def mortalidad_temprana_patologia(patologia):
 
 
 #CUANTOS PACIENTES CON UNA PATOLOGIA Y UN PROCEDIMIENTO CONCRETOS SE HAN CURADO?
-def curacion_patologia_procedimiento(patologia, procedimiento):
+def curacion_patologia_procedimiento(patologia, tipoprocedimiento):
     if not isinstance(patologia, Patologia) or not isinstance(patologia.id, int):
         raise TypeError("Patologia de entrada no es correcta")
-    if not isinstance(procedimiento, Procedimiento) or not isinstance(procedimiento.id, int):
-        raise TypeError("Procedimiento de entrada no es correcto")
-    return QuerysRepository.curacion_patologia_procedimiento()
+    if not isinstance(tipoprocedimiento, TipoProcedimiento) or not isinstance(tipoprocedimiento.id, int):
+        raise TypeError("Tipo procedimiento de entrada no es correcto")
+    return QuerysRepository.curacion_patologia_procedimiento(patologia, tipoprocedimiento)

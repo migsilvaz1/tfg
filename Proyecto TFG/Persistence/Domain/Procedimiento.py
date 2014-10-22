@@ -1,8 +1,8 @@
 class Procedimiento():
-    def __init__(self, ide, n, idev):
+    def __init__(self, ide, idt, idev):
         self.id = ide
-        self.nombre = n
+        self.idtipop = idt
         self.idevolucion = idev
 
     def __repr__(self):
-        return "id: " + str(self.id) + " nombre: " + self.nombre + " idevolucion: " + str(self.idevolucion)
+        return "id: " + str(self.id) + " idtipoprocedimiento: " + self.idtipop + " idevolucion: " + str(self.idevolucion)
