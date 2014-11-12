@@ -1,4 +1,4 @@
-from Persistence.Repositories import PruebaDiagnosticaRepository
+from Persistence.Repositories import PruebaDiagnosticaRepository, RadiologoRepository
 
 
 def get_all():
@@ -34,3 +34,14 @@ def update(pruebaDiagnostica):
 
 def delete(pruebaDiagnostica):
     raise NotImplementedError("Esta opcion no se implementa")
+
+
+def get_radiologo(pruebaDiagnostica):
+    if pruebaDiagnostica.nombre == "" or not isinstance(pruebaDiagnostica.idradiologo, int) \
+            or not isinstance(pruebaDiagnostica.id, int):
+        raise TypeError("La entidad no esta bien construida")
+    return RadiologoRepository.get_by_id(pruebaDiagnostica.idradiologo)
+
+
+def get_imagenes(pruebaDiagnostica):
+    return

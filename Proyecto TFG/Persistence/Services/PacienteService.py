@@ -44,3 +44,19 @@ def update(paciente):
 
 def delete(paciente):
     raise NotImplementedError("Esta opcion no se implementa")
+
+
+def get_factores(paciente):
+    if paciente.nombre == "" or paciente.numerohistorial == "" or paciente.fechanacimiento or paciente.sexo == "" \
+            or paciente.enfermedadesconocidas == "" or not isinstance(paciente.edad, int) \
+            or not isinstance(paciente.edadconsulta, int):
+        raise TypeError("La entidad tiene campos en blanco")
+    return PacienteRepository.get_factores(paciente)
+
+
+def get_episodios(paciente):
+    if paciente.nombre == "" or paciente.numerohistorial == "" or paciente.fechanacimiento or paciente.sexo == "" \
+            or paciente.enfermedadesconocidas == "" or not isinstance(paciente.edad, int) \
+            or not isinstance(paciente.edadconsulta, int):
+        raise TypeError("La entidad tiene campos en blanco")
+    return PacienteRepository.get_episodios(paciente)

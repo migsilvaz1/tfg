@@ -23,10 +23,37 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="QuerysRepository.py" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Persistence/Repositories/QuerysRepository.py">
+      <file leaf-file-name="ImgPruebaDiagnosticaService.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Persistence/Services/ImgPruebaDiagnosticaService.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="118" column="76" selection-start="6775" selection-end="6775" vertical-scroll-proportion="0.8924051" vertical-offset="1442" max-vertical-offset="2176">
+            <state line="23" column="36" selection-start="558" selection-end="558" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="527">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ImgProcedimientoService.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Persistence/Services/ImgProcedimientoService.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1" column="0" selection-start="52" selection-end="52" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="527">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BlobRepository.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Persistence/Repositories/BlobRepository.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="19" column="39" selection-start="527" selection-end="527" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1445">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PruebaDiagnosticaService.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Persistence/Services/PruebaDiagnosticaService.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="46" column="10" selection-start="1513" selection-end="1513" vertical-scroll-proportion="0.86507934" vertical-offset="237" max-vertical-offset="884">
               <folding />
             </state>
           </provider>
@@ -42,15 +69,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/Persistence/dbmethods/radiologoMethods.py" />
-        <option value="$PROJECT_DIR$/Persistence/DBInterface/Interface_Radiologo.py" />
-        <option value="$PROJECT_DIR$/Persistence/DBInterface/Interface_Servicios.py" />
-        <option value="$PROJECT_DIR$/Persistence/DBInterface/Interface_Servicio.py" />
-        <option value="$PROJECT_DIR$/Persistence/DBInterface/Interface_Relations.py" />
-        <option value="$PROJECT_DIR$/Persistence/Domain/Diagnostico.py" />
-        <option value="$PROJECT_DIR$/Notas" />
-        <option value="$PROJECT_DIR$/Persistence/Repositories/prueba.py" />
-        <option value="$PROJECT_DIR$/Persistence/Domain/Paciente.py" />
         <option value="$PROJECT_DIR$/Persistence/Domain/Patologia.py" />
         <option value="$PROJECT_DIR$/Persistence/Domain/PruebaDiagnostica.py" />
         <option value="$PROJECT_DIR$/Persistence/Repositories/CentroRepository.py" />
@@ -59,9 +77,6 @@
         <option value="$PROJECT_DIR$/Persistence/Repositories/DiagnosticoRepository.py" />
         <option value="$PROJECT_DIR$/Persistence/Repositories/FactorRepository.py" />
         <option value="$PROJECT_DIR$/Persistence/Repositories/MaterialRepository.py" />
-        <option value="$PROJECT_DIR$/Persistence/Repositories/PacienteRepository.py" />
-        <option value="$PROJECT_DIR$/Persistence/Repositories/PatologiaRepository.py" />
-        <option value="$PROJECT_DIR$/Persistence/Repositories/PruebaDiagnosticaRepository.py" />
         <option value="$PROJECT_DIR$/Persistence/Repositories/RadiologoRepository.py" />
         <option value="$PROJECT_DIR$/Persistence/Repositories/ServicioRepository.py" />
         <option value="$PROJECT_DIR$/Persistence/Repositories/ImagenesRepository.py" />
@@ -69,15 +84,10 @@
         <option value="$PROJECT_DIR$/Persistence/Services/CentroService.py" />
         <option value="$PROJECT_DIR$/Persistence/Services/ComplicacionService.py" />
         <option value="$PROJECT_DIR$/Persistence/Services/DiagnosticoService.py" />
-        <option value="$PROJECT_DIR$/Persistence/Services/EpisodioService.py" />
         <option value="$PROJECT_DIR$/Persistence/Repositories/EvolucionRepository.py" />
         <option value="$PROJECT_DIR$/Persistence/Services/EvolucionService.py" />
         <option value="$PROJECT_DIR$/Persistence/Services/FactorService.py" />
         <option value="$PROJECT_DIR$/Persistence/Services/MaterialService.py" />
-        <option value="$PROJECT_DIR$/Persistence/Services/PacienteService.py" />
-        <option value="$PROJECT_DIR$/Persistence/Services/PatologiaService.py" />
-        <option value="$PROJECT_DIR$/Persistence/Services/ProcedimientoService.py" />
-        <option value="$PROJECT_DIR$/Persistence/Services/PruebaDiagnosticaService.py" />
         <option value="$PROJECT_DIR$/Persistence/Services/RadiologoService.py" />
         <option value="$PROJECT_DIR$/Persistence/Services/ServicioService.py" />
         <option value="$PROJECT_DIR$/Persistence/Repositories/RelationsRepository.py" />
@@ -87,12 +97,29 @@
         <option value="$PROJECT_DIR$/Persistence/Domain/Episodio.py" />
         <option value="$PROJECT_DIR$/Persistence/Domain/Tipo_Procedimiento.py" />
         <option value="$PROJECT_DIR$/Persistence/Domain/Procedimiento.py" />
-        <option value="$PROJECT_DIR$/Persistence/Repositories/EpisodioRepository.py" />
-        <option value="$PROJECT_DIR$/Persistence/Repositories/ProcedimientoRepository.py" />
         <option value="$PROJECT_DIR$/Persistence/Repositories/TipoProcedimientoRepository.py" />
         <option value="$PROJECT_DIR$/Persistence/Services/TipoProcedimientoService.py" />
         <option value="$PROJECT_DIR$/Persistence/Repositories/QuerysRepository.py" />
         <option value="$PROJECT_DIR$/Persistence/Services/QuerysService.py" />
+        <option value="$PROJECT_DIR$/conversor.html" />
+        <option value="$PROJECT_DIR$/materiales.txt" />
+        <option value="$PROJECT_DIR$/patologias.txt" />
+        <option value="$PROJECT_DIR$/procedimientos.txt" />
+        <option value="$PROJECT_DIR$/ejemplo.txt" />
+        <option value="$PROJECT_DIR$/conversor.py" />
+        <option value="$PROJECT_DIR$/Notas" />
+        <option value="$PROJECT_DIR$/Persistence/DBCon/connection.py" />
+        <option value="$PROJECT_DIR$/Persistence/DBCon/testCon.py" />
+        <option value="$PROJECT_DIR$/Persistence/Repositories/PruebaDiagnosticaRepository.py" />
+        <option value="$PROJECT_DIR$/Persistence/Repositories/PacienteRepository.py" />
+        <option value="$PROJECT_DIR$/Persistence/Services/PacienteService.py" />
+        <option value="$PROJECT_DIR$/Persistence/Services/PruebaDiagnosticaService.py" />
+        <option value="$PROJECT_DIR$/Persistence/Services/EpisodioService.py" />
+        <option value="$PROJECT_DIR$/Persistence/Repositories/EpisodioRepository.py" />
+        <option value="$PROJECT_DIR$/Persistence/Services/PatologiaService.py" />
+        <option value="$PROJECT_DIR$/Persistence/Repositories/PatologiaRepository.py" />
+        <option value="$PROJECT_DIR$/Persistence/Services/ProcedimientoService.py" />
+        <option value="$PROJECT_DIR$/Persistence/Repositories/ProcedimientoRepository.py" />
       </list>
     </option>
   </component>
@@ -147,7 +174,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -218,6 +244,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -225,10 +252,11 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Persistence/Services/ServiceTest.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Persistence/DBCon/testCon.py" />
     <property name="FullScreen" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="restartRequiresConfirmation" value="true" />
+    <property name="DefaultHtmlFileTemplate" value="Html5" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -237,6 +265,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\admin\Documents\tfg\Proyecto TFG" />
       <recent name="C:\Users\admin\Desktop\Repositorio\PythonWorkspace\Proyecto TFG\Persistence" />
       <recent name="C:\Users\admin\Desktop\Repositorio\PythonWorkspace\Proyecto TFG\Persistence\DBCon" />
       <recent name="C:\Users\admin\Desktop\Repositorio\PythonWorkspace\Proyecto TFG\Persistence\Domain" />
@@ -247,7 +276,7 @@
       <recent name="C:\Users\admin\Desktop\Repositorio\PythonWorkspace\Proyecto TFG\Persistence\Entities" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.pruebas">
+  <component name="RunManager" selected="Python.testCon">
     <configuration default="false" name="pruebas" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -387,8 +416,27 @@
       <option name="USE_PATTERN" value="false" />
       <method />
     </configuration>
-    <list size="1">
-      <item index="0" class="java.lang.String" itemvalue="Python.pruebas" />
+    <configuration default="false" name="testCon" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Persistence/DBCon" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Proyecto TFG" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Persistence/DBCon/testCon.py" />
+      <option name="PARAMETERS" value="" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <list size="2">
+      <item index="0" class="java.lang.String" itemvalue="Python.testCon" />
+      <item index="1" class="java.lang.String" itemvalue="Python.pruebas" />
     </list>
     <recent_temporary>
       <list size="1">
@@ -426,7 +474,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1554" height="811" extended-state="0" />
+    <frame x="-8" y="-8" width="1554" height="811" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -437,15 +485,15 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298969" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32674772" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3237082" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3292683" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -468,34 +516,16 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Persistence/Domain/Evolucion.py">
+    <entry file="file://$PROJECT_DIR$/Persistence/Services/EpisodioService.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="16" selection-start="143" selection-end="143" vertical-scroll-proportion="0.1613924" vertical-offset="0" max-vertical-offset="632" />
+        <state line="30" column="98" selection-start="1022" selection-end="1022" vertical-scroll-proportion="0.0" vertical-offset="101" max-vertical-offset="731">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Persistence/Domain/Radiologo.py">
+    <entry file="file://$PROJECT_DIR$/Notas">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="204" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Persistence/Domain/Servicio.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="36" selection-start="157" selection-end="157" vertical-scroll-proportion="0.1613924" vertical-offset="0" max-vertical-offset="632" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Persistence/Domain/Centro.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="63" selection-start="182" selection-end="182" vertical-scroll-proportion="0.1613924" vertical-offset="0" max-vertical-offset="632" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Persistence/Domain/Complicacion.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Persistence/Domain/Diagnostico.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="17" selection-start="6" selection-end="17" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="221" />
+        <state line="9" column="0" selection-start="237" selection-end="237" vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="255" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Persistence/Domain/PruebaDiagnostica.py">
@@ -518,11 +548,6 @@
         <state line="3" column="0" selection-start="66" selection-end="66" vertical-scroll-proportion="0.12259615" vertical-offset="0" max-vertical-offset="416" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Notas">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="30" selection-start="158" selection-end="184" vertical-scroll-proportion="0.24460432" vertical-offset="0" max-vertical-offset="417" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Persistence/Services/ServiceTest.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="24" selection-start="91" selection-end="91" vertical-scroll-proportion="0.20383693" vertical-offset="0" max-vertical-offset="417" />
@@ -533,19 +558,9 @@
         <state line="29" column="12" selection-start="857" selection-end="857" vertical-scroll-proportion="1.1822542" vertical-offset="0" max-vertical-offset="697" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Persistence/Repositories/ComplicacionRepository.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="42" selection-start="2101" selection-end="2101" vertical-scroll-proportion="2.4868104" vertical-offset="0" max-vertical-offset="1224" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Persistence/Services/DiagnosticoService.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="33" column="22" selection-start="935" selection-end="935" vertical-scroll-proportion="0.6738609" vertical-offset="280" max-vertical-offset="697" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Persistence/Repositories/DiagnosticoRepository.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="17" selection-start="1933" selection-end="1933" vertical-scroll-proportion="2.0791366" vertical-offset="204" max-vertical-offset="1173" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Persistence/Services/EvolucionService.py">
@@ -558,11 +573,6 @@
         <state line="51" column="20" selection-start="1555" selection-end="1555" vertical-scroll-proportion="0.7553957" vertical-offset="535" max-vertical-offset="952" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Persistence/Repositories/FactorRepository.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="17" selection-start="1714" selection-end="1714" vertical-scroll-proportion="0.0" vertical-offset="739" max-vertical-offset="1156" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Persistence/Services/FactorService.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="33" column="17" selection-start="776" selection-end="776" vertical-scroll-proportion="0.7338129" vertical-offset="255" max-vertical-offset="697" />
@@ -573,49 +583,9 @@
         <state line="33" column="19" selection-start="804" selection-end="804" vertical-scroll-proportion="0.6738609" vertical-offset="280" max-vertical-offset="697" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Persistence/Repositories/MaterialRepository.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="17" selection-start="1714" selection-end="1714" vertical-scroll-proportion="1.4892086" vertical-offset="433" max-vertical-offset="1156" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Persistence/Services/PacienteService.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="38" selection-start="1475" selection-end="1475" vertical-scroll-proportion="0.55155873" vertical-offset="467" max-vertical-offset="884" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Persistence/Repositories/PacienteRepository.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="44" selection-start="2568" selection-end="2612" vertical-scroll-proportion="0.45049506" vertical-offset="974" max-vertical-offset="1428" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Persistence/Repositories/PatologiaRepository.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="17" selection-start="1732" selection-end="1732" vertical-scroll-proportion="0.7553957" vertical-offset="739" max-vertical-offset="1156" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Persistence/Services/PatologiaService.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="20" selection-start="818" selection-end="818" vertical-scroll-proportion="1.3453237" vertical-offset="0" max-vertical-offset="680" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Persistence/Services/PruebaDiagnosticaService.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="12" selection-start="856" selection-end="856" vertical-scroll-proportion="0.51079136" vertical-offset="280" max-vertical-offset="697" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Persistence/Repositories/PruebaDiagnosticaRepository.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="17" selection-start="1963" selection-end="1963" vertical-scroll-proportion="1.3669065" vertical-offset="501" max-vertical-offset="1173" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Persistence/Services/RadiologoService.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="33" column="20" selection-start="818" selection-end="818" vertical-scroll-proportion="0.7146283" vertical-offset="263" max-vertical-offset="680" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Persistence/Repositories/RadiologoRepository.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="17" selection-start="1732" selection-end="1732" vertical-scroll-proportion="1.9160671" vertical-offset="255" max-vertical-offset="1156" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Persistence/Services/ServicioService.py">
@@ -643,63 +613,19 @@
         <state line="20" column="48" selection-start="759" selection-end="759" vertical-scroll-proportion="0.5126984" vertical-offset="0" max-vertical-offset="630" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Persistence/Services/ImgPruebaDiagnosticaService.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="36" selection-start="558" selection-end="558" vertical-scroll-proportion="0.6206349" vertical-offset="0" max-vertical-offset="630" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Persistence/Services/ImgProcedimientoService.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="52" selection-end="52" vertical-scroll-proportion="0.026984127" vertical-offset="0" max-vertical-offset="630" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Persistence/Repositories/BlobRepository.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="39" selection-start="527" selection-end="527" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1445" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Persistence/Domain/Episodio.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="115" selection-start="399" selection-end="399" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="323" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Persistence/Repositories/CentroRepository.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="63" column="17" selection-start="0" selection-end="1660" vertical-scroll-proportion="0.94603175" vertical-offset="475" max-vertical-offset="1173" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Persistence/Repositories/EpisodioRepository.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="60" selection-start="1473" selection-end="1473" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1190" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Persistence/Services/EpisodioService.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="98" selection-start="1022" selection-end="1022" vertical-scroll-proportion="0.64920634" vertical-offset="101" max-vertical-offset="731" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Persistence/Domain/Procedimiento.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="26" selection-start="111" selection-end="111" vertical-scroll-proportion="0.08095238" vertical-offset="0" max-vertical-offset="630">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Persistence/Services/ProcedimientoService.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="83" selection-start="793" selection-end="793" vertical-scroll-proportion="0.6761905" vertical-offset="50" max-vertical-offset="680" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Persistence/Repositories/ProcedimientoRepository.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="34" selection-start="1873" selection-end="1873" vertical-scroll-proportion="0.784127" vertical-offset="543" max-vertical-offset="1173" />
+        <state line="3" column="26" selection-start="111" selection-end="111" vertical-scroll-proportion="0.08095238" vertical-offset="0" max-vertical-offset="630" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Persistence/Domain/TipoProcedimiento.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="65" selection-start="191" selection-end="191" vertical-scroll-proportion="0.16190477" vertical-offset="0" max-vertical-offset="630">
-          <folding />
-        </state>
+        <state line="6" column="65" selection-start="191" selection-end="191" vertical-scroll-proportion="0.16190477" vertical-offset="0" max-vertical-offset="630" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Persistence/Services/CentroService.py">
@@ -719,16 +645,176 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Persistence/Services/QuerysService.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="89" selection-start="2404" selection-end="2404" vertical-scroll-proportion="1.2911392" vertical-offset="0" max-vertical-offset="918">
-          <folding>
-            <element signature="e#0#53#0" expanded="true" />
-          </folding>
-        </state>
+        <state line="48" column="89" selection-start="2404" selection-end="2404" vertical-scroll-proportion="1.2911392" vertical-offset="0" max-vertical-offset="918" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Persistence/Repositories/QuerysRepository.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="118" column="76" selection-start="6775" selection-end="6775" vertical-scroll-proportion="0.8924051" vertical-offset="1442" max-vertical-offset="2176">
+        <state line="118" column="76" selection-start="6775" selection-end="6775" vertical-scroll-proportion="0.8952381" vertical-offset="1442" max-vertical-offset="2176" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Notas">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="0" selection-start="237" selection-end="237" vertical-scroll-proportion="0.2420886" vertical-offset="0" max-vertical-offset="632" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Persistence/DBCon/testCon.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="26" selection-start="84" selection-end="84" vertical-scroll-proportion="0.12171838" vertical-offset="0" max-vertical-offset="419" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Persistence/Domain/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="630" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Persistence/Domain/Evolucion.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="630" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Persistence/Domain/Episodio.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="24" selection-start="563" selection-end="563" vertical-scroll-proportion="0.35079366" vertical-offset="0" max-vertical-offset="630" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Persistence/DBCon/connection.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="15" selection-start="0" selection-end="581" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="459">
+          <folding>
+            <element signature="e#24#46#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Persistence/Repositories/RadiologoRepository.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="36" selection-start="409" selection-end="650" vertical-scroll-proportion="0.35079366" vertical-offset="153" max-vertical-offset="1156">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Persistence/Repositories/BlobRepository.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="39" selection-start="527" selection-end="527" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1445">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Persistence/Services/ImgProcedimientoService.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="0" selection-start="52" selection-end="52" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="527">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Persistence/Repositories/FactorRepository.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="17" selection-start="104" selection-end="376" vertical-scroll-proportion="0.33497536" vertical-offset="0" max-vertical-offset="1156">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Persistence/Repositories/PacienteRepository.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="102" column="77" selection-start="3912" selection-end="3912" vertical-scroll-proportion="0.6969206" vertical-offset="1304" max-vertical-offset="1921">
+          <folding>
+            <element signature="e#0#42#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Persistence/Services/PacienteService.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="61" column="11" selection-start="2344" selection-end="2344" vertical-scroll-proportion="0.83809525" vertical-offset="509" max-vertical-offset="1139">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Persistence/Repositories/PruebaDiagnosticaRepository.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="17" selection-start="96" selection-end="441" vertical-scroll-proportion="0.36288998" vertical-offset="0" max-vertical-offset="1190">
+          <folding>
+            <element signature="e#0#42#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Persistence/Repositories/DiagnosticoRepository.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="17" selection-start="108" selection-end="420" vertical-scroll-proportion="0.33497536" vertical-offset="0" max-vertical-offset="1173">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Persistence/Services/EpisodioService.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="83" column="69" selection-start="3986" selection-end="3986" vertical-scroll-proportion="0.727422" vertical-offset="968" max-vertical-offset="1598">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Persistence/Services/ImgPruebaDiagnosticaService.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="36" selection-start="558" selection-end="558" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="527">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Persistence/Repositories/PatologiaRepository.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="32" selection-start="118" selection-end="118" vertical-scroll-proportion="-1.1587301" vertical-offset="764" max-vertical-offset="1394">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Persistence/Services/PatologiaService.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="61" selection-start="1044" selection-end="1044" vertical-scroll-proportion="0.8111111" vertical-offset="152" max-vertical-offset="782">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Persistence/Repositories/MaterialRepository.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="17" selection-start="106" selection-end="378" vertical-scroll-proportion="0.32380953" vertical-offset="0" max-vertical-offset="1156">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Persistence/Repositories/ComplicacionRepository.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="38" selection-start="182" selection-end="182" vertical-scroll-proportion="0.16190477" vertical-offset="0" max-vertical-offset="1224">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Persistence/Services/ProcedimientoService.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="33" selection-start="1576" selection-end="1609" vertical-scroll-proportion="0.10952381" vertical-offset="764" max-vertical-offset="1394">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Persistence/Repositories/EpisodioRepository.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="17" selection-start="249" selection-end="636" vertical-scroll-proportion="0.3306321" vertical-offset="0" max-vertical-offset="1802">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Persistence/Repositories/ProcedimientoRepository.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="100" column="0" selection-start="3478" selection-end="3478" vertical-scroll-proportion="0.5316045" vertical-offset="1372" max-vertical-offset="1989">
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Persistence/Services/PruebaDiagnosticaService.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="10" selection-start="1513" selection-end="1513" vertical-scroll-proportion="0.86507934" vertical-offset="237" max-vertical-offset="884">
           <folding />
         </state>
       </provider>

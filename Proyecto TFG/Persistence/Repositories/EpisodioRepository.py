@@ -1,5 +1,8 @@
 from Persistence.DBCon.connection import *
 from Persistence.Domain.Episodio import *
+from Persistence.Domain.PruebaDiagnostica import *
+from Persistence.Domain.Diagnostico import *
+from Persistence.Domain.Procedimiento import *
 
 
 def get_all():
@@ -63,4 +66,40 @@ def get_by_name(nombre):
     dbdisconect(cnx)
     for (id_patologia, nombre, id_paciente, id_servicio, id_centro, id_patologia) in cursor:
         result.append(Episodio(id_patologia, nombre, id_paciente, id_servicio, id_centro, id_patologia))
+    return result
+
+
+def get_pruebas(episodio):
+    cnx = dbconnect()
+    result = []
+    cursor = cnx.cursor(buffered=True)
+    query = ("SELECT pruebasdiagnosticas.id_pdiagnostica, pruebasdiagnosticas.nombre, pruebasdiagnosticas.id_radiologo FROM relepisodiopdiagnostica INNER JOIN pruebasdiagnosticas ON relepisodiopdiagnostica.id_pdiagnostica = pruebasdiagnosticas.id_pdiagnostica WHERE relepisodiopdiagnostica.id_episodio = '%d'" % episodio.id)
+    cursor.execute(query)
+    dbdisconect(cnx)
+    for (id_pdiagnostica, nombre, id_radiologo) in cursor:
+        result.append(PruebaDiagnostica(id_pdiagnostica, nombre, id_radiologo))
+    return result
+
+
+def get_diagnosticos(episodio):
+    cnx = dbconnect()
+    result = []
+    cursor = cnx.cursor(buffered=True)
+    query = ("SELECT * FROM diagnosticos WHERE id_episodio = '%d'" % episodio.id)
+    cursor.execute(query)
+    dbdisconect(cnx)
+    for (id_diagnostico, nombre, id_patologia) in cursor:
+        result.append(Diagnostico(id_diagnostico, nombre, id_patologia))
+    return result
+
+
+def get_procedimientos(episodio):
+    cnx = dbconnect()
+    result = []
+    cursor = cnx.cursor(buffered=True)
+    query = ("SELECT procedimientos.id_procedimiento, procedimientos.id_tipop, procedimientos.id_evolucion FROM relepisodioprocedimiento INNER JOIN procedimientos ON relepisodioprocedimiento.id_procedimiento = procedimientos.id_procedimiento WHERE relepisodioprocedimiento.id_episodio = '%d'" % episodio.id)
+    cursor.execute(query)
+    dbdisconect(cnx)
+    for (id_procedimiento, idtipop, id_evolucion) in cursor:
+        result.append(Procedimiento(id_procedimiento, idtipop, id_evolucion))
     return result

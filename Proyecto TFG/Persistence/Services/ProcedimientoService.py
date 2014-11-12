@@ -1,4 +1,4 @@
-from Persistence.Repositories import ProcedimientoRepository
+from Persistence.Repositories import ProcedimientoRepository, EvolucionRepository, TipoProcedimientoRepository
 
 
 def get_all():
@@ -20,7 +20,7 @@ def get_by_name(name):
 
 
 def create(procedimiento):
-    if procedimiento.nombre == "" or not isinstance(procedimiento.idevolucion, int):
+    if procedimiento.nombre == "" or not isinstance(procedimiento.id, int):
         raise TypeError("La entidad tiene campos en blanco")
     ProcedimientoRepository.create(procedimiento)
 
@@ -33,3 +33,45 @@ def update(procedimiento):
 
 def delete(procedimiento):
     raise NotImplementedError("Esta opcion no se implementa")
+
+
+def get_evolucion(procedimiento):
+    if procedimiento.nombre == "" or not isinstance(procedimiento.id, int):
+        raise TypeError("La entidad tiene campos en blanco")
+    return EvolucionRepository.get_by_id(procedimiento.idevolucion)
+
+
+def get_tipoprocedimiento(procedimiento):
+    if procedimiento.nombre == "" or not isinstance(procedimiento.id, int):
+        raise TypeError("La entidad tiene campos en blanco")
+    return TipoProcedimientoRepository.get_by_id(procedimiento.idtipop)
+
+
+def get_episodios(procedimiento):
+    if procedimiento.nombre == "" or not isinstance(procedimiento.id, int):
+        raise TypeError("La entidad tiene campos en blanco")
+    return ProcedimientoRepository.get_episodios(procedimiento)
+
+
+def get_imagenes(procedimiento):
+    if procedimiento.nombre == "" or not isinstance(procedimiento.id, int):
+        raise TypeError("La entidad tiene campos en blanco")
+    return ProcedimientoRepository.get_imagenes(procedimiento)
+
+
+def get_documentos(procedimiento):
+    if procedimiento.nombre == "" or not isinstance(procedimiento.id, int):
+        raise TypeError("La entidad tiene campos en blanco")
+    return ProcedimientoRepository.get_documentos(procedimiento)
+
+
+def get_materiales(procedimiento):
+    if procedimiento.nombre == "" or not isinstance(procedimiento.id, int):
+        raise TypeError("La entidad tiene campos en blanco")
+    return ProcedimientoRepository.get_materiales(procedimiento)
+
+
+def get_complicaciones(procedimiento):
+    if procedimiento.nombre == "" or not isinstance(procedimiento.id, int):
+        raise TypeError("La entidad tiene campos en blanco")
+    return ProcedimientoRepository.get_complicaciones(procedimiento)

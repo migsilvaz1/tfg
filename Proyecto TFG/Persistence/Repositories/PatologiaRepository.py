@@ -1,5 +1,6 @@
 from Persistence.DBCon.connection import *
 from Persistence.Domain.Patologia import *
+from Persistence.Domain.Episodio import *
 
 
 def get_all():
@@ -61,4 +62,16 @@ def get_by_name(nombre):
     dbdisconect(cnx)
     for (id_patologia, nombre) in cursor:
         result.append(Patologia(id_patologia, nombre))
+    return result
+
+
+def get_procedimientos(patologia):
+    cnx = dbconnect()
+    result = []
+    cursor = cnx.cursor(buffered=True)
+    query = ("SELECT * FROM episodios WHERE id_patologia = '%d'" % patologia.id)
+    cursor.execute(query)
+    dbdisconect(cnx)
+    for (id_episodio, nombre, fecha, id_paciente, id_servicio, id_centro, id_patologia) in cursor:
+        result.append(Episodio(id_episodio, nombre, fecha, id_paciente, id_servicio, id_centro, id_patologia))
     return result

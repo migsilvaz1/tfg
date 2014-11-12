@@ -33,3 +33,9 @@ def update(patologia):
 
 def delete(patologia):
     raise NotImplementedError("Esta opcion no se implementa")
+
+
+def get_episodios(patologia):
+    if patologia.nombre == "" or not isinstance(patologia.id, int):
+        raise TypeError("La entidad no esta bien construida")
+    return PatologiaRepository.get_procedimientos(patologia)
