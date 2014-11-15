@@ -21,17 +21,17 @@ def get_all():
     query = "SELECT * FROM pacientes"
     cursor.execute(query)
     dbdisconect(cnx)
-    for (idpaciente, numeroHistorial, nombre, fechaNacimiento, sexo, enfermedadesConocidas, edad, edadConsulta) in cursor:
-        result.append(Paciente(idpaciente, numeroHistorial, nombre, fechaNacimiento, sexo, enfermedadesConocidas, edad, edadConsulta))
+    for (idpaciente, numerohistorial, nombre, fechanacimiento, sexo, enfermedadesconocidas, edad, edadconsulta) in cursor:
+        result.append(Paciente(idpaciente, numerohistorial, nombre, fechanacimiento, sexo, enfermedadesconocidas, edad, edadconsulta))
     return result
 
 
 def create(paciente):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
-    query = ("INSERT INTO pacientes VALUES('%d','%s','%s','%s','%c','%s','%d','%d')" % (paciente.id,
-        paciente.numeroHistorial, paciente.nombre, paciente.fechaNacimiento, paciente.sexo,
-        paciente.enfermedadesConocidas, paciente.edad, paciente.edadConsulta))
+    query = ("INSERT INTO pacientes VALUES(NULL,'%s','%s','%s','%c','%s','%d','%d')" % (
+        paciente.numerohistorial, paciente.nombre, paciente.fechanacimiento, paciente.sexo,
+        paciente.enfermedadesconocidas, paciente.edad, paciente.edadconsulta))
     cursor.execute(query)
     cnx.commit()
     dbdisconect(cnx)
@@ -42,8 +42,8 @@ def update(paciente):
     cursor = cnx.cursor(buffered=True)
     query = ("UPDATE pacientes SET numeroHistorial = '%s' nombre = '%s' fechaNacimiento = '%s' sexo = '%c' "
              "enfermedadesConocidas = '%s' edad = '%d' edadConsulta = '%d' WHERE id_paciente = '%d'"
-             % (paciente.numeroHistorial, paciente.nombre, paciente.fechaNacimiento, paciente.sexo, paciente.enfermedadesConocidas, paciente.edad,
-                paciente.edadConsulta, paciente.id))
+             % (paciente.numerohistorial, paciente.nombre, paciente.fechanacimiento, paciente.sexo, paciente.enfermedadesconocidas, paciente.edad,
+                paciente.edadconsulta, paciente.id))
     cursor.execute(query)
     cnx.commit()
     dbdisconect(cnx)
@@ -66,21 +66,21 @@ def get_by_name(nombre):
     query = ("SELECT * FROM pacientes WHERE nombre LIKE '%s'" % text)
     cursor.execute(query)
     dbdisconect(cnx)
-    for (idpaciente, numeroHistorial, nombre, fechaNacimiento, sexo, enfermedadesConocidas, edad, edadConsulta) in cursor:
-        result.append(Paciente(idpaciente, numeroHistorial, nombre, fechaNacimiento, sexo, enfermedadesConocidas, edad, edadConsulta))
+    for (idpaciente, numerohistorial, nombre, fechanacimiento, sexo, enfermedadesconocidas, edad, edadconsulta) in cursor:
+        result.append(Paciente(idpaciente, numerohistorial, nombre, fechanacimiento, sexo, enfermedadesconocidas, edad, edadconsulta))
     return result
 
 
-def get_by_numeroHistorial(numeroHistorial):
-    text = "%"+numeroHistorial+"%"
+def get_by_numerohistorial(numerohistorial):
+    text = "%"+numerohistorial+"%"
     result = []
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("SELECT * FROM pacientes WHERE numeroHistorial LIKE '%s'" % text)
     cursor.execute(query)
     dbdisconect(cnx)
-    for (idpaciente, numeroHistorial, nombre, fechaNacimiento, sexo, enfermedadesConocidas, edad, edadConsulta) in cursor:
-        result.append(Paciente(idpaciente, numeroHistorial, nombre, fechaNacimiento, sexo, enfermedadesConocidas, edad, edadConsulta))
+    for (idpaciente, numerohistorial, nombre, fechanacimiento, sexo, enfermedadesconocidas, edad, edadconsulta) in cursor:
+        result.append(Paciente(idpaciente, numerohistorial, nombre, fechanacimiento, sexo, enfermedadesconocidas, edad, edadconsulta))
     return result
 
 

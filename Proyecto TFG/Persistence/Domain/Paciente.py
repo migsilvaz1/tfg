@@ -1,4 +1,4 @@
-class Paciente():
+class Paciente:
     def __init__(self, ide, nh, n, fn, s, enc, e, ec):
         self.id = ide
         self.numerohistorial = nh

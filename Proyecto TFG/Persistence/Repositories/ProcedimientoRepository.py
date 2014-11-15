@@ -95,8 +95,8 @@ def get_complicaciones(procedimiento):
     query = ("SELECT complicaciones.id_complicacion, complicaciones.nombre, complicaciones.mortalidadTemprana, complicaciones.mortalidadTardia FROM relcomplicacionprocedimiento INNER JOIN complicaciones ON relcomplicacionprocedimiento.id_complicacion = complicaciones.id_complicacion WHERE relcomplicacionprocedimiento.id_procedimiento = '%d'" % procedimiento.id)
     cursor.execute(query)
     dbdisconect(cnx)
-    for (id_complicacion, nombre, mortalidadTemprana, mortalidadTardia) in cursor:
-        result.append(Complicacion(id_complicacion, nombre, mortalidadTemprana, mortalidadTardia))
+    for (id_complicacion, nombre, mortalidadtemprana, mortalidadtardia) in cursor:
+        result.append(Complicacion(id_complicacion, nombre, mortalidadtemprana, mortalidadtardia))
     return result
 
 

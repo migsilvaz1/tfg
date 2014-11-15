@@ -9,8 +9,8 @@ def get_all():
     query = ("SELECT * FROM complicaciones")
     cursor.execute(query)
     dbdisconect(cnx)
-    for (id_complicacion, nombre, mortalidadTemprana, mortalidadTardia) in cursor:
-        result.append(Complicacion(id_complicacion, nombre, mortalidadTemprana, mortalidadTardia))
+    for (id_complicacion, nombre, mortalidadtemprana, mortalidadtardia) in cursor:
+        result.append(Complicacion(id_complicacion, nombre, mortalidadtemprana, mortalidadtardia))
     return result
 
 
@@ -28,8 +28,8 @@ def create(complicacion):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("INSERT INTO complicaciones VALUES(NULL,'%s','%c','%c')" % (complicacion.nombre,
-                                                                         complicacion.mortalidadTemprana,
-                                                                         complicacion.mortalidadTardia))
+                                                                         complicacion.mortalidadtemprana,
+                                                                         complicacion.mortalidadtardia))
     cursor.execute(query)
     cnx.commit()
     dbdisconect(cnx)
@@ -39,8 +39,8 @@ def update(complicacion):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("UPDATE complicaciones SET nombre = '%s', mortalidadTemprana = '%c', mortalidadTardia = '%c'"
-             " WHERE id_complicacion = '%d'" % (complicacion.nombre, complicacion.mortalidadTemprana,
-                                                complicacion.mortalidadTardia, complicacion.id))
+             " WHERE id_complicacion = '%d'" % (complicacion.nombre, complicacion.mortalidadtemprana,
+                                                complicacion.mortalidadtardia, complicacion.id))
     cursor.execute(query)
     cnx.commit()
     dbdisconect(cnx)
@@ -63,6 +63,6 @@ def get_by_name(nombre):
     query = ("SELECT * FROM complicaciones WHERE nombre LIKE '%s'" % text)
     cursor.execute(query)
     dbdisconect(cnx)
-    for (id_complicacion, nombre, mortalidadTemprana, mortalidadTardia) in cursor:
-        result.append(Complicacion(id_complicacion, nombre, mortalidadTemprana, mortalidadTardia))
+    for (id_complicacion, nombre, mortalidadtemprana, mortalidadtardia) in cursor:
+        result.append(Complicacion(id_complicacion, nombre, mortalidadtemprana, mortalidadtardia))
     return result

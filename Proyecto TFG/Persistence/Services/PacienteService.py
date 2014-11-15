@@ -19,18 +19,28 @@ def get_by_name(name):
         raise TypeError("El dato debe ser str")
 
 
-def get_by_numeroHistorial(numeroHistorial):
-    if isinstance(numeroHistorial, str):
-        return PacienteRepository.get_by_numeroHistorial(numeroHistorial)
+def get_by_numerohistorial(numerohistorial):
+    if isinstance(numerohistorial, str):
+        return PacienteRepository.get_by_numerohistorial(numerohistorial)
     else:
         raise TypeError("El dato debe ser str")
 
 
 def create(paciente):
-    if paciente.nombre == "" or paciente.numerohistorial == "" or paciente.fechanacimiento or paciente.sexo == "" \
-            or paciente.enfermedadesconocidas == "" or not isinstance(paciente.edad, int) \
-            or not isinstance(paciente.edadconsulta, int):
-        raise TypeError("La entidad tiene campos en blanco")
+    if paciente.nombre == "":
+        raise TypeError("Nombre paciente erroneo")
+    if paciente.numerohistorial == "":
+        raise TypeError("Numero de historial paciente erroneo")
+    if paciente.fechanacimiento == "":
+        raise TypeError("fecha nacimiento paciente erroneo")
+    if paciente.sexo == "":
+        raise TypeError("sexo paciente erroneo")
+    if paciente.enfermedadesconocidas == "":
+        raise TypeError("enfermedades conocidas paciente erroneo")
+    if not isinstance(paciente.edad, int):
+        raise TypeError("edad paciente erroneo")
+    if not isinstance(paciente.edadconsulta, int):
+        raise TypeError("edad consulta")
     PacienteRepository.create(paciente)
 
 
