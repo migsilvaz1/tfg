@@ -1,4 +1,4 @@
-class Episodio():
+class Episodio:
     def __init__(self, ide, n, f, nh, ids, idc, idp):
         self.id = ide
         self.nombre = n

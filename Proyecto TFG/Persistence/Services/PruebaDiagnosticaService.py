@@ -9,26 +9,27 @@ def get_by_id(ide):
     if isinstance(ide, int):
         return PruebaDiagnosticaRepository.get_by_id(ide)
     else:
-        raise TypeError("El dato debe ser int")
+        raise TypeError("El id debe ser int")
 
 
 def get_by_name(name):
     if isinstance(name, str):
         return PruebaDiagnosticaRepository.get_by_name(name)
     else:
-        raise TypeError("El dato debe ser str")
+        raise TypeError("El nombre debe ser str")
 
 
 def create(pruebaDiagnostica):
-    if pruebaDiagnostica.nombre == "" or not isinstance(pruebaDiagnostica.idradiologo, int):
-        raise TypeError("La entidad tiene campos en blanco")
+    if pruebaDiagnostica.nombre == "":
+        raise TypeError("El nombre no puede estar en blanco")
     PruebaDiagnosticaRepository.create(pruebaDiagnostica)
 
 
 def update(pruebaDiagnostica):
-    if pruebaDiagnostica.nombre == "" or not isinstance(pruebaDiagnostica.idradiologo, int) \
-            or not isinstance(pruebaDiagnostica.id, int):
-        raise TypeError("La entidad no esta bien construida")
+    if pruebaDiagnostica.nombre == "":
+        raise TypeError("El nombre no puede estar en blanco")
+    if not isinstance(pruebaDiagnostica.id, int):
+        raise TypeError("El id debe ser int")
     PruebaDiagnosticaRepository.update(pruebaDiagnostica)
 
 
@@ -37,9 +38,8 @@ def delete(pruebaDiagnostica):
 
 
 def get_radiologo(pruebaDiagnostica):
-    if pruebaDiagnostica.nombre == "" or not isinstance(pruebaDiagnostica.idradiologo, int) \
-            or not isinstance(pruebaDiagnostica.id, int):
-        raise TypeError("La entidad no esta bien construida")
+    if not isinstance(pruebaDiagnostica.idradiologo, int):
+        raise TypeError("La prueba no tiene radiologo asociado")
     return RadiologoRepository.get_by_id(pruebaDiagnostica.idradiologo)
 
 

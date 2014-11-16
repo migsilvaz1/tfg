@@ -1,4 +1,4 @@
-class PruebaDiagnostica():
+class PruebaDiagnostica:
     def __init__(self, ide, n, idr):
         self.id = ide
         self.nombre = n

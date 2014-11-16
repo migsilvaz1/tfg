@@ -9,25 +9,27 @@ def get_by_id(ide):
     if isinstance(ide, int):
         return RadiologoRepository.get_by_id(ide)
     else:
-        raise TypeError("El dato debe ser int")
+        raise TypeError("El id debe ser int")
 
 
 def get_by_name(name):
     if isinstance(name, str):
         return RadiologoRepository.get_by_name(name)
     else:
-        raise TypeError("El dato debe ser str")
+        raise TypeError("El nombre debe ser str")
 
 
 def create(radiologo):
     if radiologo.nombre == "":
-        raise TypeError("La entidad tiene campos en blanco")
+        raise TypeError("El nombre no puede estar en blanco")
     RadiologoRepository.create(radiologo)
 
 
 def update(radiologo):
-    if radiologo.nombre == "" or not isinstance(radiologo.id, int):
-        raise TypeError("La entidad no esta bien construida")
+    if radiologo.nombre == "":
+        raise TypeError("El nombre no puede estar en blanco")
+    if not isinstance(radiologo.id, int):
+         raise TypeError("El id debe ser int")
     RadiologoRepository.update(radiologo)
 
 

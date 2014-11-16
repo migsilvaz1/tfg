@@ -1,4 +1,4 @@
-class Evolucion():
+class Evolucion:
     def __init__(self, ide, r, n):
         self.id = ide
         self.resultado = r

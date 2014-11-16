@@ -9,25 +9,27 @@ def get_by_id(ide):
     if isinstance(ide, int):
         return FactorRepository.get_by_id(ide)
     else:
-        raise TypeError("El dato debe ser int")
+        raise TypeError("El id debe ser int")
 
 
 def get_by_name(name):
     if isinstance(name, str):
         return FactorRepository.get_by_name(name)
     else:
-        raise TypeError("El dato debe ser str")
+        raise TypeError("El nombre debe ser str")
 
 
 def create(factor):
     if factor.nombre == "":
-        raise TypeError("La entidad tiene campos en blanco")
+        raise TypeError("El nombre no puede estar en blanco")
     FactorRepository.create(factor)
 
 
 def update(factor):
-    if factor.nombre == "" or not isinstance(factor.id, int):
-        raise TypeError("La entidad no esta bien construida")
+    if factor.nombre == "":
+        raise TypeError("El nombre no puede estar en blanco")
+    if not isinstance(factor.id, int):
+        raise TypeError("El id debe ser int")
     FactorRepository.update(factor)
 
 

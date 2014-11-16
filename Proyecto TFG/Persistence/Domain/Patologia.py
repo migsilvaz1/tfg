@@ -1,4 +1,4 @@
-class Patologia():
+class Patologia:
     def __init__(self, ide, n):
         self.id = ide
         self.nombre = n

@@ -1,4 +1,4 @@
-class Procedimiento():
+class Procedimiento:
     def __init__(self, ide, idt, idev):
         self.id = ide
         self.idtipop = idt

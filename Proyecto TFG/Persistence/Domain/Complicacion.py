@@ -1,4 +1,4 @@
-class Complicacion():
+class Complicacion:
     def __init__(self, ide,  n, nmt, mt):
         self.id = ide
         self.nombre = n

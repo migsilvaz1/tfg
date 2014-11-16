@@ -9,25 +9,31 @@ def get_by_id(ide):
     if isinstance(ide, int):
         return DiagnosticoRepository.get_by_id(ide)
     else:
-        raise TypeError("El dato debe ser int")
+        raise TypeError("El id debe ser int")
 
 
 def get_by_name(name):
     if isinstance(name, str):
         return DiagnosticoRepository.get_by_name(name)
     else:
-        raise TypeError("El dato debe ser str")
+        raise TypeError("El nombre debe ser str")
 
 
 def create(diagnostico):
-    if diagnostico.nombre == "" or not isinstance(diagnostico.idepisodio, int):
-        raise TypeError("La entidad tiene campos en blanco")
+    if diagnostico.nombre == "":
+        raise TypeError("El nombre no puede estar en blanco")
+    if not isinstance(diagnostico.idepisodio, int):
+        raise TypeError("Debe tener una id de episoido valida")
     DiagnosticoRepository.create(diagnostico)
 
 
 def update(diagnostico):
-    if diagnostico.nombre == "" or not isinstance(diagnostico.idepisodio, int) or not isinstance(centro.id, int):
-        raise TypeError("La entidad no esta bien construida")
+    if isinstance(diagnostico.id, int):
+        raise TypeError("El id debe ser int")
+    if diagnostico.nombre == "":
+        raise TypeError("El nombre no puede estar en blanco")
+    if not isinstance(diagnostico.idepisodio, int):
+        raise TypeError("Debe tener una id de episoido valida")
     DiagnosticoRepository.update(diagnostico)
 
 

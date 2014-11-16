@@ -1,4 +1,4 @@
-class TipoProcedimiento():
+class TipoProcedimiento:
     def __init__(self, i, n):
         self.id = i
         self.nombre = n
