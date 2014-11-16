@@ -22,7 +22,7 @@ def get_by_name(name):
 def create(pruebaDiagnostica):
     if pruebaDiagnostica.nombre == "":
         raise TypeError("El nombre no puede estar en blanco")
-    PruebaDiagnosticaRepository.create(pruebaDiagnostica)
+    return PruebaDiagnosticaRepository.create(pruebaDiagnostica)
 
 
 def update(pruebaDiagnostica):

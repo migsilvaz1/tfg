@@ -22,7 +22,7 @@ def get_by_name(name):
 def create(centro):
     if centro.nombre == "":
         raise TypeError("El nombre no puede estar en blanco")
-    CentroRepository.create(centro)
+    return CentroRepository.create(centro)
 
 
 def update(centro):

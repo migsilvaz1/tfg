@@ -22,7 +22,7 @@ def get_by_name(name):
 def create(servicio):
     if servicio.nombre == "":
         raise TypeError("El nombre no puede estar en blanco")
-    ServicioRepository.create(servicio)
+    return ServicioRepository.create(servicio)
 
 
 def update(servicio):

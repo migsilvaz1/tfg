@@ -26,7 +26,7 @@ def create(complicacion):
         raise TypeError("La mortalidad temprana no puede estar en blanco")
     if complicacion.mortalidadtardia == "":
         raise TypeError("La mortalidad tardia no puede estar en blanco")
-    ComplicacionRepository.create(complicacion)
+    return ComplicacionRepository.create(complicacion)
 
 
 def update(complicacion):

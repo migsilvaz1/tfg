@@ -30,7 +30,11 @@ def create(radiologo):
     query = ("INSERT INTO radiologos VALUES(NULL,'%s')" % radiologo.nombre)
     cursor.execute(query)
     cnx.commit()
+    query = ("SELECT @@identity AS id")
+    cursor.execute(query)
+    row = cursor.fetchone()
     dbdisconect(cnx)
+    return row[0]
 
 
 def update(radiologo):

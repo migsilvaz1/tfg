@@ -15,7 +15,7 @@ def get_by_id(ide):
 def create(evolucion):
     if evolucion.resultado == "":
         raise TypeError("El resultado no puede estar en blanco")
-    EvolucionRepository.create(evolucion)
+    return EvolucionRepository.create(evolucion)
 
 
 def update(evolucion):

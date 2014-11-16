@@ -24,7 +24,7 @@ def create(diagnostico):
         raise TypeError("El nombre no puede estar en blanco")
     if not isinstance(diagnostico.idepisodio, int):
         raise TypeError("Debe tener una id de episoido valida")
-    DiagnosticoRepository.create(diagnostico)
+    return DiagnosticoRepository.create(diagnostico)
 
 
 def update(diagnostico):

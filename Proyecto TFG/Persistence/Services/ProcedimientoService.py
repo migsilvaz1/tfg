@@ -24,7 +24,7 @@ def create(procedimiento):
         raise TypeError("El nombre no puede estar en blanco")
     if not isinstance(procedimiento.id, int):
         raise TypeError("El id debe ser int")
-    ProcedimientoRepository.create(procedimiento)
+    return ProcedimientoRepository.create(procedimiento)
 
 
 def update(procedimiento):

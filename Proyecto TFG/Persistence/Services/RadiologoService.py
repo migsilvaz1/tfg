@@ -22,7 +22,7 @@ def get_by_name(name):
 def create(radiologo):
     if radiologo.nombre == "":
         raise TypeError("El nombre no puede estar en blanco")
-    RadiologoRepository.create(radiologo)
+    return RadiologoRepository.create(radiologo)
 
 
 def update(radiologo):

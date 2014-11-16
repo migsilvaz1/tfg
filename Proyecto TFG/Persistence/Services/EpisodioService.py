@@ -30,7 +30,7 @@ def create(episodio):
         raise TypeError("Debe tener un centro asociado")
     if not isinstance(episodio.idservicio, int):
         raise TypeError("Debe tener un servicio asociado")
-    EpisodioRepository.create(episodio)
+    return EpisodioRepository.create(episodio)
 
 
 def update(episodio):

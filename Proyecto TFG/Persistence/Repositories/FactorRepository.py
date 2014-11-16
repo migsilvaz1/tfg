@@ -30,7 +30,11 @@ def create(factor):
     query = ("INSERT INTO factoresDeRiesgo VALUES(NULL,'%s')" % factor.nombre)
     cursor.execute(query)
     cnx.commit()
+    query = ("SELECT @@identity AS id")
+    cursor.execute(query)
+    row = cursor.fetchone()
     dbdisconect(cnx)
+    return row[0]
 
 
 def update(factor):

@@ -30,7 +30,11 @@ def create(prueba):
     query = ("INSERT INTO pruebasDiagnosticas VALUES(NULL,'%s','%d')" % (prueba.nombre, prueba.idradiologo))
     cursor.execute(query)
     cnx.commit()
+    query = ("SELECT @@identity AS id")
+    cursor.execute(query)
+    row = cursor.fetchone()
     dbdisconect(cnx)
+    return row[0]
 
 
 def update(prueba):

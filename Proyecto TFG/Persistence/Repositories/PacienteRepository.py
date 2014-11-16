@@ -34,7 +34,11 @@ def create(paciente):
         paciente.enfermedadesconocidas, paciente.edad, paciente.edadconsulta))
     cursor.execute(query)
     cnx.commit()
+    query = ("SELECT @@identity AS id")
+    cursor.execute(query)
+    row = cursor.fetchone()
     dbdisconect(cnx)
+    return row[0]
 
 
 def update(paciente):

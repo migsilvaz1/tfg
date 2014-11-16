@@ -22,7 +22,7 @@ def get_by_name(name):
 def create(material):
     if material.nombre == "":
         raise TypeError("El nombre no puede estar en blanco")
-    MaterialRepository.create(material)
+    return MaterialRepository.create(material)
 
 
 def update(material):

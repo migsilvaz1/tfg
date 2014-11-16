@@ -22,7 +22,7 @@ def get_by_name(name):
 def create(factor):
     if factor.nombre == "":
         raise TypeError("El nombre no puede estar en blanco")
-    FactorRepository.create(factor)
+    return FactorRepository.create(factor)
 
 
 def update(factor):

@@ -41,7 +41,7 @@ def create(paciente):
         raise TypeError("edad paciente erroneo")
     if not isinstance(paciente.edadconsulta, int):
         raise TypeError("edad consulta")
-    PacienteRepository.create(paciente)
+    return PacienteRepository.create(paciente)
 
 
 def update(paciente):

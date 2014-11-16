@@ -22,7 +22,7 @@ def get_by_name(name):
 def create(Tipop):
     if Tipop.nombre == "":
         raise TypeError("El nombre no puede estar en blanco")
-    TipoProcedimientoRepository.create(Tipop)
+    return TipoProcedimientoRepository.create(Tipop)
 
 
 def update(Tipop):

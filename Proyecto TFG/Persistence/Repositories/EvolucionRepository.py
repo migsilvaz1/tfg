@@ -30,7 +30,11 @@ def create(evolucion):
     query = ("INSERT INTO evoluciones VALUES(NULL,'%s','%s')" % (evolucion.resultado, evolucion.notas))
     cursor.execute(query)
     cnx.commit()
+    query = ("SELECT @@identity AS id")
+    cursor.execute(query)
+    row = cursor.fetchone()
     dbdisconect(cnx)
+    return row[0]
 
 
 def update(evolucion):

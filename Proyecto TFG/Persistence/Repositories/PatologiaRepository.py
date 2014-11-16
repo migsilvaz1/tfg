@@ -31,7 +31,11 @@ def create(patologia):
     query = ("INSERT INTO patologias VALUES(NULL,'%s')" % patologia.nombre)
     cursor.execute(query)
     cnx.commit()
+    query = ("SELECT @@identity AS id")
+    cursor.execute(query)
+    row = cursor.fetchone()
     dbdisconect(cnx)
+    return row[0]
 
 
 def update(patologia):
