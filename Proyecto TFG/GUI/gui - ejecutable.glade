@@ -2,6 +2,7 @@
 <interface>
   <requires lib="gtk+" version="2.24"/>
   <!-- interface-naming-policy project-wide -->
+  <object class="GtkAction" id="action1"/>
   <object class="GtkWindow" id="datosepisodio">
     <property name="can_focus">False</property>
     <child>
@@ -3985,6 +3986,7 @@
                         <property name="use_action_appearance">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <signal name="activate" handler="on_imagemenuitem85_activate" swapped="no"/>
                       </object>
                     </child>
                     <child>
@@ -3992,6 +3994,78 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="use_action_appearance">False</property>
+                        <signal name="activate" handler="on_separatormenuitem9_activate" swapped="no"/>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="menuitem35">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="use_action_appearance">False</property>
+                <property name="label" translatable="yes">Nuevo</property>
+                <child type="submenu">
+                  <object class="GtkMenu" id="menu49">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="GtkImageMenuItem" id="imagemenuitem88">
+                        <property name="label">gtk-new</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">True</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkImageMenuItem" id="imagemenuitem89">
+                        <property name="label">gtk-open</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">True</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkImageMenuItem" id="imagemenuitem90">
+                        <property name="label">gtk-save</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">True</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkImageMenuItem" id="imagemenuitem91">
+                        <property name="label">gtk-save-as</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">True</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkSeparatorMenuItem" id="separatormenuitem19">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_action_appearance">False</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkImageMenuItem" id="imagemenuitem92">
+                        <property name="label">gtk-quit</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">True</property>
                       </object>
                     </child>
                   </object>
@@ -4092,7 +4166,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkEntry" id="entry14">
+                              <object class="GtkEntry" id="nhistorialhome">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="invisible_char">●</property>
@@ -4107,7 +4181,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkEntry" id="entry15">
+                              <object class="GtkEntry" id="nombrepacientehome">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="invisible_char">●</property>
@@ -4124,7 +4198,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkEntry" id="entry16">
+                              <object class="GtkEntry" id="fechanacimientohome">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="invisible_char">●</property>
@@ -4217,7 +4291,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkEntry" id="entry8">
+                              <object class="GtkEntry" id="nombreepisodiohome">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="invisible_char">●</property>
@@ -4232,7 +4306,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkEntry" id="entry9">
+                              <object class="GtkEntry" id="fechaepisodiohome">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="invisible_char">●</property>
@@ -4249,14 +4323,9 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkEntry" id="entry11">
+                              <object class="GtkComboBox" id="serviciohome">
                                 <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="invisible_char">●</property>
-                                <property name="primary_icon_activatable">False</property>
-                                <property name="secondary_icon_activatable">False</property>
-                                <property name="primary_icon_sensitive">True</property>
-                                <property name="secondary_icon_sensitive">True</property>
+                                <property name="can_focus">False</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
@@ -4266,14 +4335,9 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkEntry" id="entry12">
+                              <object class="GtkComboBox" id="patologiahome">
                                 <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="invisible_char">●</property>
-                                <property name="primary_icon_activatable">False</property>
-                                <property name="secondary_icon_activatable">False</property>
-                                <property name="primary_icon_sensitive">True</property>
-                                <property name="secondary_icon_sensitive">True</property>
+                                <property name="can_focus">False</property>
                               </object>
                               <packing>
                                 <property name="left_attach">1</property>
@@ -4329,7 +4393,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkEntry" id="entry13">
+                              <object class="GtkEntry" id="nombreprocedimientohome">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="invisible_char">●</property>
@@ -4375,13 +4439,14 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkButton" id="button_save1">
+                          <object class="GtkButton" id="guardarhome">
                             <property name="label">gtk-save</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
                             <property name="use_action_appearance">False</property>
                             <property name="use_stock">True</property>
+                            <signal name="clicked" handler="guardar" swapped="no"/>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -4905,6 +4970,27 @@
       <action-widget response="0">button14</action-widget>
       <action-widget response="0">button15</action-widget>
     </action-widgets>
+  </object>
+  <object class="GtkMenu" id="menu28">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <child>
+      <object class="GtkImageMenuItem" id="imagemenuitem87">
+        <property name="label">gtk-new</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="use_action_appearance">False</property>
+        <property name="use_underline">True</property>
+        <property name="use_stock">True</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkSeparatorMenuItem" id="separatormenuitem18">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="use_action_appearance">False</property>
+      </object>
+    </child>
   </object>
   <object class="GtkDialog" id="new_centro">
     <property name="can_focus">False</property>
