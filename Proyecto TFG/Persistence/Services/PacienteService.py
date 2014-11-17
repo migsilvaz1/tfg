@@ -33,22 +33,18 @@ def create(paciente):
         raise TypeError("Numero de historial paciente erroneo")
     if paciente.fechanacimiento == "":
         raise TypeError("fecha nacimiento paciente erroneo")
-    if paciente.sexo == "":
-        raise TypeError("sexo paciente erroneo")
-    if paciente.enfermedadesconocidas == "":
-        raise TypeError("enfermedades conocidas paciente erroneo")
-    if not isinstance(paciente.edad, int):
-        raise TypeError("edad paciente erroneo")
-    if not isinstance(paciente.edadconsulta, int):
-        raise TypeError("edad consulta")
     return PacienteRepository.create(paciente)
 
 
 def update(paciente):
-    if paciente.nombre == "" or paciente.numerohistorial == "" or paciente.fechanacimiento or paciente.sexo == "" \
-            or paciente.enfermedadesconocidas == "" or not isinstance(paciente.edad, int) \
-            or not isinstance(paciente.edadconsulta, int) or not isinstance(paciente.id, int):
-        raise TypeError("La entidad no esta bien construida")
+    if paciente.nombre == "":
+        raise TypeError("Nombre paciente erroneo")
+    if paciente.numerohistorial == "":
+        raise TypeError("Numero de historial paciente erroneo")
+    if paciente.fechanacimiento == "":
+        raise TypeError("fecha nacimiento paciente erroneo")
+    if not isinstance(paciente.id, int):
+        raise TypeError("El id debe ser int")
     PacienteRepository.update(paciente)
 
 
@@ -57,16 +53,24 @@ def delete(paciente):
 
 
 def get_factores(paciente):
-    if paciente.nombre == "" or paciente.numerohistorial == "" or paciente.fechanacimiento or paciente.sexo == "" \
-            or paciente.enfermedadesconocidas == "" or not isinstance(paciente.edad, int) \
-            or not isinstance(paciente.edadconsulta, int):
-        raise TypeError("La entidad tiene campos en blanco")
+    if paciente.nombre == "":
+        raise TypeError("Nombre paciente erroneo")
+    if paciente.numerohistorial == "":
+        raise TypeError("Numero de historial paciente erroneo")
+    if paciente.fechanacimiento == "":
+        raise TypeError("fecha nacimiento paciente erroneo")
+    if not isinstance(paciente.id, int):
+        raise TypeError("El id debe ser int")
     return PacienteRepository.get_factores(paciente)
 
 
 def get_episodios(paciente):
-    if paciente.nombre == "" or paciente.numerohistorial == "" or paciente.fechanacimiento or paciente.sexo == "" \
-            or paciente.enfermedadesconocidas == "" or not isinstance(paciente.edad, int) \
-            or not isinstance(paciente.edadconsulta, int):
-        raise TypeError("La entidad tiene campos en blanco")
+    if paciente.nombre == "":
+        raise TypeError("Nombre paciente erroneo")
+    if paciente.numerohistorial == "":
+        raise TypeError("Numero de historial paciente erroneo")
+    if paciente.fechanacimiento == "":
+        raise TypeError("fecha nacimiento paciente erroneo")
+    if not isinstance(paciente.id, int):
+        raise TypeError("El id debe ser int")
     return PacienteRepository.get_episodios(paciente)
