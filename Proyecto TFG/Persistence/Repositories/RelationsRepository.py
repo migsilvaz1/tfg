@@ -2,9 +2,7 @@ from Persistence.DBCon.connection import *
 
 
 #relProcedimietnoMaterial
-def create_procedimiento_material(procedimiento, material):
-    id_procedimiento = procedimiento.id
-    id_material = material.id
+def create_procedimiento_material(id_procedimiento, id_material):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("INSERT INTO relProcedimietnoMaterial VALUES('%d','%d')" % (id_procedimiento, id_material))
@@ -13,9 +11,7 @@ def create_procedimiento_material(procedimiento, material):
     dbdisconect(cnx)
 
 
-def delete_procedimiento_mataterial(procedimiento, material):
-    id_procedimiento = procedimiento.id
-    id_material = material.id
+def delete_procedimiento_mataterial(id_procedimiento, id_material):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("DELETE FROM relProcedimietnoMaterial WHERE id_procedimiento = '%d' AND id_material = '%d'" % id_procedimiento, id_material)
@@ -25,9 +21,7 @@ def delete_procedimiento_mataterial(procedimiento, material):
 
 
 #relEpisodioProcedimiento
-def create_episodio_procedimiento(episodio, procedimiento):
-    id_episodio = episodio.id
-    id_procedimiento = procedimiento.id
+def create_episodio_procedimiento(id_episodio, id_procedimiento):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("INSERT INTO relEpisodioProcedimiento VALUES('%d','%d')" % (id_episodio, id_procedimiento))
@@ -36,9 +30,7 @@ def create_episodio_procedimiento(episodio, procedimiento):
     dbdisconect(cnx)
 
 
-def delete_episodio_procedimiento(episodio, procedimiento):
-    id_episodio = episodio.id
-    id_procedimiento = procedimiento.id
+def delete_episodio_procedimiento(id_episodio, id_procedimiento):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("DELETE FROM relEpisodioProcedimiento WHERE id_episodio = '%d' AND id_procedimiento = '%d'" % id_episodio, id_procedimiento)
@@ -48,9 +40,7 @@ def delete_episodio_procedimiento(episodio, procedimiento):
 
 
 #relComplicacionProcedimiento
-def create_complicacion_procedimiento(complicacion, procedimiento):
-    id_complicacion = complicacion.id
-    id_procedimiento = procedimiento.id
+def create_complicacion_procedimiento(id_complicacion, id_procedimiento):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("INSERT INTO relComplicacionProcedimiento VALUES('%d','%d')" % (id_procedimiento, id_complicacion))
@@ -59,9 +49,7 @@ def create_complicacion_procedimiento(complicacion, procedimiento):
     dbdisconect(cnx)
 
 
-def delete_complicacion_procedimiento(complicacion, procedimiento):
-    id_complicacion = complicacion.id
-    id_procedimiento = procedimiento.id
+def delete_complicacion_procedimiento(id_complicacion, id_procedimiento):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("DELETE FROM relComplicacionProcedimiento WHERE id_complicacion = '%d' AND id_procedimiento = '%d'" % id_complicacion, id_procedimiento)
@@ -71,9 +59,7 @@ def delete_complicacion_procedimiento(complicacion, procedimiento):
 
 
 #relEpisodioPdiagnostica
-def create_episodio_pdiagnostica(episodio, pdiagnostica):
-    id_episodio = episodio.id
-    id_pdiagnostica = pdiagnostica.id
+def create_episodio_pdiagnostica(id_episodio, id_pdiagnostica):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("INSERT INTO relEpisodioPdiagnostica VALUES('%d','%d')" % (id_episodio, id_pdiagnostica))
@@ -82,9 +68,7 @@ def create_episodio_pdiagnostica(episodio, pdiagnostica):
     dbdisconect(cnx)
 
 
-def delete_episodio_pdiagnostica(episodio, pdiagnostica):
-    id_episodio = episodio.id
-    id_pdiagnostica = pdiagnostica.id
+def delete_episodio_pdiagnostica(id_episodio, id_pdiagnostica):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
     query = ("DELETE FROM relEpisodioPdiagnostica WHERE id_episodio = '%d' AND id_pdiagnostica = '%d'" % id_episodio, id_pdiagnostica)

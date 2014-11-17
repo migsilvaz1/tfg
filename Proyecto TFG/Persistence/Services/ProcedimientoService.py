@@ -20,8 +20,6 @@ def get_by_name(name):
 
 
 def create(procedimiento):
-    if procedimiento.nombre == "":
-        raise TypeError("El nombre no puede estar en blanco")
     if not isinstance(procedimiento.id, int):
         raise TypeError("El id debe ser int")
     return ProcedimientoRepository.create(procedimiento)

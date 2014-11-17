@@ -30,7 +30,7 @@ def get_by_id(ide):
 def create(episodio):
     cnx = dbconnect()
     cursor = cnx.cursor(buffered=True)
-    query = ("INSERT INTO episodios VALUES(NULL,'%s','%d','%d','%d','%d','%d')" % (episodio.nombre, episodio.fecha,
+    query = ("INSERT INTO episodios VALUES(NULL,'%s','%s','%d','%d','%d','%d')" % (episodio.nombre, episodio.fecha,
                                     episodio.idpaciente, episodio.idservicio, episodio.idcentro, episodio.idpatologia))
     cursor.execute(query)
     cnx.commit()
