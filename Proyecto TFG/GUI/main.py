@@ -6,6 +6,9 @@ import gtk.glade
 from Persistence.Services import PacienteService, ServicioService, PatologiaService
 from Persistence.Domain.Paciente import Paciente
 
+combo_value_servicio_id = -1
+combo_value_patologia_id = -1
+
 
 class App():
 
@@ -17,8 +20,21 @@ class App():
         return
 
     def guardar_home(self, event, widget, data):
-        n = data[''].get_text()
-        print(n)
+        print(data['numero_historial'].get_text())
+        print(combo_value_servicio_id)
+        print(combo_value_patologia_id)
+
+    def changed_cb_servicio(self, combobox):
+        global combo_value_servicio_id
+        index = combobox.get_active()
+        model = combobox.get_model()
+        combo_value_servicio_id = model[index][0]
+
+    def changed_cb_patologia(self, combobox):
+        global combo_value_patologia_id
+        index = combobox.get_active()
+        model = combobox.get_model()
+        combo_value_patologia_id = model[index][0]
 
     def __init__(self):
         builder = gtk.Builder()
@@ -50,24 +66,26 @@ class App():
         #La lista de servicios
         servicios = ServicioService.get_all()
         lista_servicios = builder.get_object('serviciohome')
-        lista_servicios_model = gtk.ListStore(str)
+        lista_servicios_model = gtk.ListStore(int, str)
         for elem in servicios:
-            lista_servicios_model.append([elem.nombre])
+            lista_servicios_model.append([elem.id, elem.nombre])
         cell = gtk.CellRendererText()
         lista_servicios.set_model(lista_servicios_model)
         lista_servicios.pack_start(cell)
-        lista_servicios.set_attributes(cell, text=0)
+        lista_servicios.set_attributes(cell, text=1)
+        lista_servicios.connect('changed', self.changed_cb_servicio)
 
         #La lista de patologias
         patologias = PatologiaService.get_all()
         lista_patologias = builder.get_object('patologiahome')
-        lista_patologias_model = gtk.ListStore(str)
+        lista_patologias_model = gtk.ListStore(int, str)
         for elem in patologias:
-            lista_patologias_model.append([elem.nombre])
+            lista_patologias_model.append([elem.id, elem.nombre])
         cell = gtk.CellRendererText()
         lista_patologias.set_model(lista_patologias_model)
         lista_patologias.pack_start(cell)
-        lista_patologias.set_attributes(cell, text=0)
+        lista_patologias.set_attributes(cell, text=1)
+        lista_patologias.connect('changed', self.changed_cb_patologia)
 
         #Datos de entrada
         numero_historial = builder.get_object('nhistorialhome')
@@ -82,7 +100,7 @@ class App():
             'fecha_nacimiento': fecha_nacimiento,
             'nombre_episodio': nombre_episodio,
             'fecha_episodio': fecha_episodio,
-            'nombre_procedimiento': nombre_procedimiento
+            'nombre_procedimiento': nombre_procedimiento,
         }
         button_guardar = builder.get_object('guardarhome')
         button_guardar.connect("button_press_event", self.guardar_home, data)
