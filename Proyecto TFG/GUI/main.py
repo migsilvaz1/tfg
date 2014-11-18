@@ -88,6 +88,37 @@ class App():
             self.tree_model.append(None, [elem.numerohistorial, elem.nombre])
         return
 
+    def datos_paciente(self, widget, event, data):
+        self.window.hide()
+        window = self.builder.get_object("datospaciente")
+        window.set_size_request(1024, 700)
+        window.connect("delete_event", self.delete_event)
+        window.connect("destroy", self.destroy)
+        window.show()
+        tree = self.builder.get_object("treeview12")
+        tree_model = gtk.TreeStore(str, str)
+        cellnh = gtk.CellRendererText()
+        col1 = gtk.TreeViewColumn("Numero Historial", cellnh)
+        col1.add_attribute(cellnh, 'text', 0)
+        celln = gtk.CellRendererText()
+        col2 = gtk.TreeViewColumn("Nombre", celln)
+        col2.add_attribute(celln, 'text', 1)
+        tree.append_column(col1)
+        tree.append_column(col2)
+        tree.set_model(tree_model)
+        lista_pacientes = PacienteService.get_all()
+        for elem in lista_pacientes:
+            tree_model.append(None, [elem.numerohistorial, elem.nombre])
+        tree.connect("row-activated", self.update_datos_paciente(tree.get_selection()))
+        #sacar los datos del paciente seleccionado
+        print(self.tree.get_selection())
+        return
+
+    def update_datos_paciente(self, selection):
+        #sacar los datos del paciente seleccionado
+        print(self.tree.get_selection())
+        return
+
     def __init__(self):
         self.builder = gtk.Builder()
         self.builder.add_from_file("gui - ejecutable.glade")
@@ -162,6 +193,8 @@ class App():
         }
         button_guardar = self.builder.get_object('guardarhome')
         button_guardar.connect("button_press_event", self.guardar_home, data)
+        self.tree.connect("row-activated", self.datos_paciente)
+
 
 if __name__ == "__main__":
     app = App()
