@@ -4439,15 +4439,9 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkEntry" id="tipoprocedimientohome">
+                              <object class="GtkComboBox" id="tipoprocedimientohome">
                                 <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="invisible_char">●</property>
-                                <property name="invisible_char_set">True</property>
-                                <property name="primary_icon_activatable">False</property>
-                                <property name="secondary_icon_activatable">False</property>
-                                <property name="primary_icon_sensitive">True</property>
-                                <property name="secondary_icon_sensitive">True</property>
+                                <property name="can_focus">False</property>
                               </object>
                               <packing>
                                 <property name="expand">True</property>
@@ -5017,27 +5011,6 @@
       <action-widget response="0">button14</action-widget>
       <action-widget response="0">button15</action-widget>
     </action-widgets>
-  </object>
-  <object class="GtkMenu" id="menu28">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <child>
-      <object class="GtkImageMenuItem" id="imagemenuitem87">
-        <property name="label">gtk-new</property>
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="use_action_appearance">False</property>
-        <property name="use_underline">True</property>
-        <property name="use_stock">True</property>
-      </object>
-    </child>
-    <child>
-      <object class="GtkSeparatorMenuItem" id="separatormenuitem18">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="use_action_appearance">False</property>
-      </object>
-    </child>
   </object>
   <object class="GtkDialog" id="new_centro">
     <property name="can_focus">False</property>
