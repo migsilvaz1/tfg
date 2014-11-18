@@ -23,6 +23,11 @@ class App():
         gtk.main_quit()
         return
 
+    def hide_window(self, widget, event):
+        window = widget.get_toplevel().get_toplevel().get_toplevel()
+        window.hide()
+        return
+
     def guardar_home(self, event, widget, data):
         numero_historial = data['numero_historial'].get_text()
         nombre_paciente = data['nombre_paciente'].get_text()
@@ -38,11 +43,21 @@ class App():
             id_procedimiento = ProcedimientoService.create(procedimiento)
             RelationsService.add_procedimiento_to_episodio(int(id_episodio), int(id_procedimiento))
         except TypeError:
-            alert = self.builder.get_object("exportarbd")
+            alert = self.builder.get_object("windowerror")
+            alert.set_position(gtk.WIN_POS_CENTER)
             alert.show()
-            self.builder.get_object("label2").set_text(str(sys.exc_info()[1]))
+            self.builder.get_object("labelerror").set_text(str(sys.exc_info()[1]))
+            button_aceptar = self.builder.get_object("buttonerror")
+            button_aceptar.connect("button_press_event", self.hide_window)
         self.create_tree_pacientes()
-
+        self.builder.get_object('nhistorialhome').set_text("")
+        self.builder.get_object('nombrepacientehome').set_text("")
+        self.builder.get_object('fechanacimientohome').set_text("")
+        self.builder.get_object('nombreepisodiohome').set_text("")
+        self.builder.get_object('fechaepisodiohome').set_text("")
+        self.lista_servicios.set_active(-1)
+        self.lista_patologias.set_active(-1)
+        self.lista_tprocedimientos.set_active(-1)
         return
 
     def changed_cb_servicio(self, combobox):
@@ -147,8 +162,6 @@ class App():
         }
         button_guardar = self.builder.get_object('guardarhome')
         button_guardar.connect("button_press_event", self.guardar_home, data)
-
-
 
 if __name__ == "__main__":
     app = App()
