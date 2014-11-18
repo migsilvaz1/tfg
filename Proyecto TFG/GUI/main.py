@@ -6,8 +6,6 @@ import gtk
 import gtk.glade
 from Persistence.Services import PacienteService, ServicioService, PatologiaService, EpisodioService, ProcedimientoService, TipoProcedimientoService, RelationsService
 from Persistence.Domain.Paciente import Paciente
-from Persistence.Domain.Servicio import Servicio
-from Persistence.Domain.Patologia import Patologia
 from Persistence.Domain.Episodio import Episodio
 from Persistence.Domain.Procedimiento import Procedimiento
 
@@ -40,96 +38,106 @@ class App():
             id_procedimiento = ProcedimientoService.create(procedimiento)
             RelationsService.add_procedimiento_to_episodio(int(id_episodio), int(id_procedimiento))
         except TypeError:
-            builder = gtk.Builder()
-            builder.add_from_file("gui - ejecutable.glade")
-            window = builder.get_object("exportarbd")
-            window.show()
-            builder.get_object("label2").set_text(str(sys.exc_info()[1]))
+            alert = self.builder.get_object("exportarbd")
+            alert.show()
+            self.builder.get_object("label2").set_text(str(sys.exc_info()[1]))
+        self.create_tree_pacientes()
+
+        return
 
     def changed_cb_servicio(self, combobox):
         global combo_value_servicio_id
         index = combobox.get_active()
         model = combobox.get_model()
         combo_value_servicio_id = model[index][0]
+        return
 
     def changed_cb_patologia(self, combobox):
         global combo_value_patologia_id
         index = combobox.get_active()
         model = combobox.get_model()
         combo_value_patologia_id = model[index][0]
+        return
 
     def changed_cb_tipoprocedimiento(self, combobox):
         global combo_value_tipoprocedimiento_id
         index = combobox.get_active()
         model = combobox.get_model()
         combo_value_tipoprocedimiento_id = model[index][0]
+        return
 
-    def show_init(self, builder):
-        window = builder.get_object("home")
-        window.set_size_request(1024, 700)
-        window.connect("delete_event", self.delete_event)
-        window.connect("destroy", self.destroy)
-        window.show()
-        #Rellendando la bista
+    def create_tree_pacientes(self):
+        self.tree_model.clear()
+        lista_pacientes = PacienteService.get_all()
+        for elem in lista_pacientes:
+            self.tree_model.append(None, [elem.numerohistorial, elem.nombre])
+        return
+
+    def __init__(self):
+        self.builder = gtk.Builder()
+        self.builder.add_from_file("gui - ejecutable.glade")
+        self.window = self.builder.get_object("home")
+        self.window.set_size_request(1024, 700)
+        self.window.connect("delete_event", self.delete_event)
+        self.window.connect("destroy", self.destroy)
+        self.window.show()
+        #Rellendando la vista
         #el tree de los pacientes
-        tree = builder.get_object("treeview9")
-        tree_model = gtk.TreeStore(str, str)
+        self.tree = self.builder.get_object("treeview9")
+        self.tree_model = gtk.TreeStore(str, str)
         cellnh = gtk.CellRendererText()
         col1 = gtk.TreeViewColumn("Numero Historial", cellnh)
         col1.add_attribute(cellnh, 'text', 0)
         celln = gtk.CellRendererText()
         col2 = gtk.TreeViewColumn("Nombre", celln)
         col2.add_attribute(celln, 'text', 1)
-        tree.append_column(col1)
-        tree.append_column(col2)
-        tree.set_model(tree_model)
-
-        lista_pacientes = PacienteService.get_all()
-        for elem in lista_pacientes:
-            tree_model.append(None, [elem.numerohistorial, elem.nombre])
+        self.tree.append_column(col1)
+        self.tree.append_column(col2)
+        self.tree.set_model(self.tree_model)
+        self.create_tree_pacientes()
 
         #La lista de servicios
         servicios = ServicioService.get_all()
-        lista_servicios = builder.get_object('serviciohome')
-        lista_servicios_model = gtk.ListStore(int, str)
+        self.lista_servicios = self.builder.get_object('serviciohome')
+        self.lista_servicios_model = gtk.ListStore(int, str)
         for elem in servicios:
-            lista_servicios_model.append([elem.id, elem.nombre])
+            self.lista_servicios_model.append([elem.id, elem.nombre])
         cell = gtk.CellRendererText()
-        lista_servicios.set_model(lista_servicios_model)
-        lista_servicios.pack_start(cell)
-        lista_servicios.set_attributes(cell, text=1)
-        lista_servicios.connect('changed', self.changed_cb_servicio)
+        self.lista_servicios.set_model(self.lista_servicios_model)
+        self.lista_servicios.pack_start(cell)
+        self.lista_servicios.set_attributes(cell, text=1)
+        self.lista_servicios.connect('changed', self.changed_cb_servicio)
 
         #La lista de patologias
         patologias = PatologiaService.get_all()
-        lista_patologias = builder.get_object('patologiahome')
-        lista_patologias_model = gtk.ListStore(int, str)
+        self.lista_patologias = self.builder.get_object('patologiahome')
+        self.lista_patologias_model = gtk.ListStore(int, str)
         for elem in patologias:
-            lista_patologias_model.append([elem.id, elem.nombre])
+            self.lista_patologias_model.append([elem.id, elem.nombre])
         cell = gtk.CellRendererText()
-        lista_patologias.set_model(lista_patologias_model)
-        lista_patologias.pack_start(cell)
-        lista_patologias.set_attributes(cell, text=1)
-        lista_patologias.connect('changed', self.changed_cb_patologia)
+        self.lista_patologias.set_model(self.lista_patologias_model)
+        self.lista_patologias.pack_start(cell)
+        self.lista_patologias.set_attributes(cell, text=1)
+        self.lista_patologias.connect('changed', self.changed_cb_patologia)
 
         #La lista de tiposprocedimientos
         tprocedimientos = TipoProcedimientoService.get_all()
-        lista_tprocedimientos = builder.get_object('tipoprocedimientohome')
-        lista_tprocedimientos_model = gtk.ListStore(int, str)
+        self.lista_tprocedimientos = self.builder.get_object('tipoprocedimientohome')
+        self.lista_tprocedimientos_model = gtk.ListStore(int, str)
         for elem in tprocedimientos:
-            lista_tprocedimientos_model.append([elem.id, elem.nombre])
+            self.lista_tprocedimientos_model.append([elem.id, elem.nombre])
         cell = gtk.CellRendererText()
-        lista_tprocedimientos.set_model(lista_tprocedimientos_model)
-        lista_tprocedimientos.pack_start(cell)
-        lista_tprocedimientos.set_attributes(cell, text=1)
-        lista_tprocedimientos.connect('changed', self.changed_cb_tipoprocedimiento)
+        self.lista_tprocedimientos.set_model(self.lista_tprocedimientos_model)
+        self.lista_tprocedimientos.pack_start(cell)
+        self.lista_tprocedimientos.set_attributes(cell, text=1)
+        self.lista_tprocedimientos.connect('changed', self.changed_cb_tipoprocedimiento)
 
         #Datos de entrada
-        numero_historial = builder.get_object('nhistorialhome')
-        nombre_paciente = builder.get_object('nombrepacientehome')
-        fecha_nacimiento = builder.get_object('fechanacimientohome')
-        nombre_episodio = builder.get_object('nombreepisodiohome')
-        fecha_episodio = builder.get_object('fechaepisodiohome')
+        numero_historial = self.builder.get_object('nhistorialhome')
+        nombre_paciente = self.builder.get_object('nombrepacientehome')
+        fecha_nacimiento = self.builder.get_object('fechanacimientohome')
+        nombre_episodio = self.builder.get_object('nombreepisodiohome')
+        fecha_episodio = self.builder.get_object('fechaepisodiohome')
         data = {
             'numero_historial': numero_historial,
             'nombre_paciente': nombre_paciente,
@@ -137,13 +145,9 @@ class App():
             'nombre_episodio': nombre_episodio,
             'fecha_episodio': fecha_episodio
         }
-        button_guardar = builder.get_object('guardarhome')
+        button_guardar = self.builder.get_object('guardarhome')
         button_guardar.connect("button_press_event", self.guardar_home, data)
 
-    def __init__(self):
-        builder = gtk.Builder()
-        builder.add_from_file("gui - ejecutable.glade")
-        self.show_init(builder)
 
 
 if __name__ == "__main__":
