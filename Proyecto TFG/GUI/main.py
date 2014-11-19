@@ -1,4 +1,3 @@
-__author__ = 'admin'
 import sys
 import pygtk
 pygtk.require("2.0")
@@ -372,9 +371,10 @@ class App():
         self.builder = gtk.Builder()
         self.builder.add_from_file("gui - ejecutable.glade")
         self.window = self.builder.get_object("vistabasica")
-        self.window.set_size_request(1024, 700)
+        self.window.set_size_request(800, 600)
         self.window.connect("delete_event", self.delete_event)
         self.window.connect("destroy", self.destroy)
+        self.window.set_position(gtk.WIN_POS_CENTER)
         self.window.show()
 
         #boxs
