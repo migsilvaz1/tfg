@@ -102,7 +102,7 @@ class App():
         paciente_id = self.tree_model.get_value(iterador, 0)
         paciente = PacienteService.get_by_id(paciente_id)
         self.builder.get_object("nombredatospaciente").set_text(paciente.nombre)
-        self.builder.get_object("nhistorildatospaciente").set_text(paciente.numerohistorial)
+        self.builder.get_object("nhistorialdatospaciente").set_text(paciente.numerohistorial)
         self.builder.get_object("fechadatospaciente").set_text(str(paciente.fechanacimiento))
         self.builder.get_object("sexodatospaciente").set_text(paciente.sexo)
         self.builder.get_object("enfermedadesdatospaciente").set_text(paciente.enfermedadesconocidas)
@@ -118,9 +118,75 @@ class App():
         for elem in episodios:
             self.tree_episodios_model.append(None, [elem.id, elem.nombre])
 
-    def show_popup(self, widget):
+    def show_nservicio(self, widget):
         popup = self.builder.get_object("new_servicio")
+        popup.connect("delete_event", self.delete_event)
+        popup.set_position(gtk.WIN_POS_CENTER)
+        popup.set_size_request(300, 150)
+        button = self.builder.get_object("button_ca")
+        button.connect("button_press_event", self.hide_window)
         popup.show()
+        return
+
+    def show_ncentro(self, widget):
+        popup = self.builder.get_object("new_centro")
+        popup.connect("delete_event", self.delete_event)
+        popup.set_position(gtk.WIN_POS_CENTER)
+        popup.set_size_request(300, 150)
+        button = self.builder.get_object("button_cancel")
+        button.connect("button_press_event", self.hide_window)
+        popup.show()
+        return
+
+    def show_nmaterial(self, widget):
+        popup = self.builder.get_object("new_material")
+        popup.connect("delete_event", self.delete_event)
+        popup.set_position(gtk.WIN_POS_CENTER)
+        popup.set_size_request(300, 150)
+        button = self.builder.get_object("button_cance1")
+        button.connect("button_press_event", self.hide_window)
+        popup.show()
+        return
+
+    def show_nradiologo(self, widget):
+        popup = self.builder.get_object("new_radiologo")
+        popup.connect("delete_event", self.delete_event)
+        popup.set_position(gtk.WIN_POS_CENTER)
+        popup.set_size_request(300, 150)
+        button = self.builder.get_object("button_can")
+        button.connect("button_press_event", self.hide_window)
+        popup.show()
+        return
+
+    def show_nfactor(self, widget):
+        popup = self.builder.get_object("new_factor")
+        popup.connect("delete_event", self.delete_event)
+        popup.set_position(gtk.WIN_POS_CENTER)
+        popup.set_size_request(300, 150)
+        button = self.builder.get_object("button_cance")
+        button.connect("button_press_event", self.hide_window)
+        popup.show()
+        return
+
+    def show_npatologia(self, widget):
+        popup = self.builder.get_object("new_patologia")
+        popup.connect("delete_event", self.delete_event)
+        popup.set_position(gtk.WIN_POS_CENTER)
+        popup.set_size_request(300, 150)
+        button = self.builder.get_object("button_canc")
+        button.connect("button_press_event", self.hide_window)
+        popup.show()
+        return
+
+    def show_ntprocedimiento(self, widget):
+        popup = self.builder.get_object("new_tipoprocedimiento")
+        popup.connect("delete_event", self.delete_event)
+        popup.set_position(gtk.WIN_POS_CENTER)
+        popup.set_size_request(300, 150)
+        button = self.builder.get_object("button_cance2")
+        button.connect("button_press_event", self.hide_window)
+        popup.show()
+        return
 
     def __init__(self):
         self.builder = gtk.Builder()
@@ -142,8 +208,20 @@ class App():
         self.box_datos_paciente.hide()
 
         #conexiones del menu
-        menu_item = self.builder.get_object("imagemenuitem75")
-        menu_item.connect("activate", self.show_popup)
+        menu_item_nuevoservicio = self.builder.get_object("nuevoservicio")
+        menu_item_nuevoservicio.connect("activate", self.show_nservicio)
+        menu_item_nuevocentro = self.builder.get_object("nuevocentro")
+        menu_item_nuevocentro.connect("activate", self.show_ncentro)
+        menu_item_nuevomaterial = self.builder.get_object("nuevomaterial")
+        menu_item_nuevomaterial.connect("activate", self.show_nmaterial)
+        menu_item_nuevoradiologo = self.builder.get_object("nuevoradiologo")
+        menu_item_nuevoradiologo.connect("activate", self.show_nradiologo)
+        menu_item_nuevofactor = self.builder.get_object("nuevofactor")
+        menu_item_nuevofactor.connect("activate", self.show_nfactor)
+        menu_item_nuevapatologia = self.builder.get_object("nuevapatologia")
+        menu_item_nuevapatologia.connect("activate", self.show_npatologia)
+        menu_item_nuevotipoprocedimiento = self.builder.get_object("nuevotipoprocedimiento")
+        menu_item_nuevotipoprocedimiento.connect("activate", self.show_ntprocedimiento)
 
         #rellenado del tree con los pacientes
         self.tree = self.builder.get_object("treeview8")
