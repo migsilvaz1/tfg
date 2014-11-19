@@ -102,12 +102,25 @@ class App():
         paciente_id = self.tree_model.get_value(iterador, 0)
         paciente = PacienteService.get_by_id(paciente_id)
         self.builder.get_object("nombredatospaciente").set_text(paciente.nombre)
-        self.builder.get_object("nhistorialdatospaciente").set_text(paciente.numerohistorial)
-        self.builder.get_object("fechanacimientodatospaciente").set_text(str(paciente.fechanacimiento))
+        self.builder.get_object("nhistorildatospaciente").set_text(paciente.numerohistorial)
+        self.builder.get_object("fechadatospaciente").set_text(str(paciente.fechanacimiento))
         self.builder.get_object("sexodatospaciente").set_text(paciente.sexo)
         self.builder.get_object("enfermedadesdatospaciente").set_text(paciente.enfermedadesconocidas)
 
-        tree_facrores_riesgo = self.builder.get_object("factoresdatospaciente")
+        #Construccion de trees
+        self.tree_facrores_riesgo_model.clear()
+        factores = PacienteService.get_factores(paciente)
+        for elem in factores:
+            self.tree_facrores_riesgo_model.append(None, [elem.id, elem.nombre])
+
+        self.tree_episodios_model.clear()
+        episodios = PacienteService.get_episodios(paciente)
+        for elem in episodios:
+            self.tree_episodios_model.append(None, [elem.id, elem.nombre])
+
+    def show_popup(self, widget):
+        popup = self.builder.get_object("new_servicio")
+        popup.show()
 
     def __init__(self):
         self.builder = gtk.Builder()
@@ -127,6 +140,10 @@ class App():
         self.container.pack_start(self.box_home)
         self.container.pack_start(self.box_datos_paciente)
         self.box_datos_paciente.hide()
+
+        #conexiones del menu
+        menu_item = self.builder.get_object("imagemenuitem75")
+        menu_item.connect("activate", self.show_popup)
 
         #rellenado del tree con los pacientes
         self.tree = self.builder.get_object("treeview8")
@@ -187,6 +204,28 @@ class App():
 
         #Ver datos paciente
         self.tree.connect("row-activated", self.datos_paciente)
+
+        #Tree factores
+        self.tree_facrores_riesgo = self.builder.get_object("factoresdatospaciente")
+        self.tree_facrores_riesgo_model = gtk.TreeStore(int, str)
+        cellid_factores = gtk.CellRendererText()
+        cellid_factores.set_visible(False)
+        cellnh_factores = gtk.CellRendererText()
+        col1_factores = gtk.TreeViewColumn("Nombre", cellnh_factores)
+        col1_factores.add_attribute(cellnh_factores, 'text', 1)
+        self.tree_facrores_riesgo.append_column(col1_factores)
+        self.tree_facrores_riesgo.set_model(self.tree_facrores_riesgo_model)
+
+        #Tree episodios
+        self.tree_episodios = self.builder.get_object("episodiosdatospaciente")
+        self.tree_episodios_model = gtk.TreeStore(int, str)
+        cellid_episodios = gtk.CellRendererText()
+        cellid_episodios.set_visible(False)
+        cellnh_episodios = gtk.CellRendererText()
+        col1_episodios = gtk.TreeViewColumn("Nombre", cellnh_episodios)
+        col1_episodios.add_attribute(cellnh_episodios, 'text', 1)
+        self.tree_episodios.append_column(col1_episodios)
+        self.tree_episodios.set_model(self.tree_episodios_model)
 
 
 if __name__ == "__main__":
