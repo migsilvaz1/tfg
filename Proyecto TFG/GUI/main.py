@@ -104,6 +104,7 @@ class App():
             self.builder.get_object("labelerror").set_text(str(sys.exc_info()[1]))
             button_aceptar = self.builder.get_object("buttonerror")
             button_aceptar.connect("button_press_event", self.hide_window)
+            button_aceptar.get_image().show()
         self.create_tree_pacientes()
         self.builder.get_object('nhistorialhome1').set_text("")
         self.builder.get_object('nombrepacientehome1').set_text("")
@@ -119,6 +120,7 @@ class App():
         self.box_home.hide()
         self.box_datos_paciente.show()
         inicio = self.builder.get_object("homedatospaciente")
+        inicio.get_image().show()
         inicio.connect("button_press_event", self.datospaciente_to_home)
         iterador = self.tree.get_selection().get_selected()[1]
         paciente_id = self.tree_model.get_value(iterador, 0)
@@ -139,6 +141,8 @@ class App():
         episodios = PacienteService.get_episodios(paciente)
         for elem in episodios:
             self.tree_episodios_model.append(None, [elem.id, elem.nombre])
+        self.builder.get_object("anadirfactordatospaciente").get_image().show()
+        self.builder.get_object("quitarfactordatospaciente").get_image().show()
 
     def show_nservicio(self, widget):
         popup = self.builder.get_object("new_servicio")
@@ -147,8 +151,10 @@ class App():
         popup.set_size_request(300, 150)
         button = self.builder.get_object("button_ca")
         button.connect("button_press_event", self.hide_window)
+        button.get_image().show()
         popup.show()
         save = self.builder.get_object("button13")
+        save.get_image().show()
         data = 'servicio'
         save.connect("button_press_event", self.save_popup, data)
         return
@@ -160,10 +166,12 @@ class App():
         popup.set_size_request(300, 150)
         button = self.builder.get_object("button_cancel")
         button.connect("button_press_event", self.hide_window)
+        button.get_image().show()
         popup.show()
         save = self.builder.get_object("button_save")
         data = 'centro'
         save.connect("button_press_event", self.save_popup, data)
+        save.get_image().show()
         return
 
     def show_nmaterial(self, widget):
@@ -173,8 +181,10 @@ class App():
         popup.set_size_request(300, 150)
         button = self.builder.get_object("button_cance1")
         button.connect("button_press_event", self.hide_window)
+        button.get_image().show()
         popup.show()
         save = self.builder.get_object("button_sa1")
+        save.get_image().show()
         data = 'material'
         save.connect("button_press_event", self.save_popup, data)
         return
@@ -186,8 +196,10 @@ class App():
         popup.set_size_request(300, 150)
         button = self.builder.get_object("button_can")
         button.connect("button_press_event", self.hide_window)
+        button.get_image().show()
         popup.show()
         save = self.builder.get_object("button_")
+        save.get_image().show()
         data = 'radiologo'
         save.connect("button_press_event", self.save_popup, data)
         return
@@ -199,8 +211,10 @@ class App():
         popup.set_size_request(300, 150)
         button = self.builder.get_object("button_cance")
         button.connect("button_press_event", self.hide_window)
+        button.get_image().show()
         popup.show()
         save = self.builder.get_object("button_sa")
+        save.get_image().show()
         data = 'factor'
         save.connect("button_press_event", self.save_popup, data)
         return
@@ -212,8 +226,10 @@ class App():
         popup.set_size_request(300, 150)
         button = self.builder.get_object("button_canc")
         button.connect("button_press_event", self.hide_window)
+        button.get_image().show()
         popup.show()
         save = self.builder.get_object("button_s")
+        save.get_image().show()
         data = 'patologia'
         save.connect("button_press_event", self.save_popup, data)
         return
@@ -225,8 +241,10 @@ class App():
         popup.set_size_request(300, 150)
         button = self.builder.get_object("button_cance2")
         button.connect("button_press_event", self.hide_window)
+        button.get_image().show()
         popup.show()
         save = self.builder.get_object("button_sa2")
+        save.get_image().show()
         data = 'tprocedimiento'
         save.connect("button_press_event", self.save_popup, data)
         print('vuelvo')
@@ -247,6 +265,7 @@ class App():
                 self.builder.get_object("labelerror").set_text(str(sys.exc_info()[1]))
                 button_aceptar = self.builder.get_object("buttonerror")
                 button_aceptar.connect("button_press_event", self.hide_window)
+                button_aceptar.get_image().show()
             popup = self.builder.get_object("new_servicio")
             popup.hide()
         if data == 'centro':
@@ -262,6 +281,7 @@ class App():
                 self.builder.get_object("labelerror").set_text(str(sys.exc_info()[1]))
                 button_aceptar = self.builder.get_object("buttonerror")
                 button_aceptar.connect("button_press_event", self.hide_window)
+                button_aceptar.get_image().show()
             popup = self.builder.get_object("new_centro")
             popup.hide()
         if data == 'material':
@@ -277,6 +297,7 @@ class App():
                 self.builder.get_object("labelerror").set_text(str(sys.exc_info()[1]))
                 button_aceptar = self.builder.get_object("buttonerror")
                 button_aceptar.connect("button_press_event", self.hide_window)
+                button_aceptar.get_image().show()
             popup = self.builder.get_object("new_material")
             popup.hide()
         if data == 'radiologo':
@@ -292,6 +313,7 @@ class App():
                 self.builder.get_object("labelerror").set_text(str(sys.exc_info()[1]))
                 button_aceptar = self.builder.get_object("buttonerror")
                 button_aceptar.connect("button_press_event", self.hide_window)
+                button_aceptar.get_image().show()
             popup = self.builder.get_object("new_radiologo")
             popup.hide()
         if data == 'factor':
@@ -307,6 +329,7 @@ class App():
                 self.builder.get_object("labelerror").set_text(str(sys.exc_info()[1]))
                 button_aceptar = self.builder.get_object("buttonerror")
                 button_aceptar.connect("button_press_event", self.hide_window)
+                button_aceptar.get_image().show()
             popup = self.builder.get_object("new_factor")
             popup.hide()
         if data == 'patologia':
@@ -323,6 +346,7 @@ class App():
                 self.builder.get_object("labelerror").set_text(str(sys.exc_info()[1]))
                 button_aceptar = self.builder.get_object("buttonerror")
                 button_aceptar.connect("button_press_event", self.hide_window)
+                button_aceptar.get_image().show()
             popup = self.builder.get_object("new_patologia")
             popup.hide()
         if data == 'tprocedimiento':
@@ -339,6 +363,7 @@ class App():
                 self.builder.get_object("labelerror").set_text(str(sys.exc_info()[1]))
                 button_aceptar = self.builder.get_object("buttonerror")
                 button_aceptar.connect("button_press_event", self.hide_window)
+                button_aceptar.get_image().show()
             popup = self.builder.get_object("new_tipoprocedimiento")
             popup.hide()
         return
@@ -434,6 +459,7 @@ class App():
         #Boton Guardarhome
         self.button_guardar = self.builder.get_object('guardarhome1')
         self.button_guardar.connect("button_press_event", self.guardar_home)
+        self.button_guardar.get_image().show()
 
         #Ver datos paciente
         self.tree.connect("row-activated", self.datos_paciente)
