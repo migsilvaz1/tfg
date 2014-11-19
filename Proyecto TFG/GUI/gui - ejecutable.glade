@@ -7057,7 +7057,9 @@
     </child>
   </object>
   <object class="GtkWindow" id="windowerror">
-    <property name="can_focus">False</property>
+    <property name="can_focus">True</property>
+    <property name="has_focus">True</property>
+    <property name="is_focus">True</property>
     <property name="urgency_hint">True</property>
     <property name="deletable">False</property>
     <child>
