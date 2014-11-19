@@ -7058,6 +7058,8 @@
   </object>
   <object class="GtkWindow" id="windowerror">
     <property name="can_focus">False</property>
+    <property name="urgency_hint">True</property>
+    <property name="deletable">False</property>
     <child>
       <object class="GtkAspectFrame" id="aspectframe17">
         <property name="visible">True</property>
