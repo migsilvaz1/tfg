@@ -4,10 +4,24 @@ import pygtk
 pygtk.require("2.0")
 import gtk
 import gtk.glade
-from Persistence.Services import PacienteService, ServicioService, PatologiaService, EpisodioService, ProcedimientoService, TipoProcedimientoService, RelationsService
+from Persistence.Services import PacienteService, ServicioService, PatologiaService, EpisodioService, \
+    ProcedimientoService, TipoProcedimientoService, RelationsService, CentroService, ComplicacionService, \
+    DiagnosticoService, EvolucionService, FactorService, MaterialService, PruebaDiagnosticaService, RadiologoService
 from Persistence.Domain.Paciente import Paciente
 from Persistence.Domain.Episodio import Episodio
 from Persistence.Domain.Procedimiento import Procedimiento
+from Persistence.Domain.Centro import Centro
+from Persistence.Domain.Complicacion import Complicacion
+from Persistence.Domain.Diagnostico import Diagnostico
+from Persistence.Domain.Evolucion import Evolucion
+from Persistence.Domain.Factor import Factor
+from Persistence.Domain.Material import Material
+from Persistence.Domain.Patologia import Patologia
+from Persistence.Domain.PruebaDiagnostica import PruebaDiagnostica
+from Persistence.Domain.Radiologo import Radiologo
+from Persistence.Domain.Servicio import Servicio
+from Persistence.Domain.TipoProcedimiento import TipoProcedimiento
+
 
 combo_value_servicio_id = -1
 combo_value_patologia_id = -1
@@ -57,6 +71,14 @@ class App():
         return
 
     def datospaciente_to_home(self, widget, event):
+        self.builder.get_object('nhistorialhome1').set_text("")
+        self.builder.get_object('nombrepacientehome1').set_text("")
+        self.builder.get_object('fechanacimientohome1').set_text("")
+        self.builder.get_object('nombreepisodiohome1').set_text("")
+        self.builder.get_object('fechaepisodiohome1').set_text("")
+        self.lista_servicios.set_active(-1)
+        self.lista_patologias.set_active(-1)
+        self.lista_tprocedimientos.set_active(-1)
         self.box_home.show()
         self.box_datos_paciente.hide()
         return
@@ -126,6 +148,9 @@ class App():
         button = self.builder.get_object("button_ca")
         button.connect("button_press_event", self.hide_window)
         popup.show()
+        save = self.builder.get_object("button13")
+        data = 'servicio'
+        save.connect("button_press_event", self.save_popup, data)
         return
 
     def show_ncentro(self, widget):
@@ -136,6 +161,9 @@ class App():
         button = self.builder.get_object("button_cancel")
         button.connect("button_press_event", self.hide_window)
         popup.show()
+        save = self.builder.get_object("button_save")
+        data = 'centro'
+        save.connect("button_press_event", self.save_popup, data)
         return
 
     def show_nmaterial(self, widget):
@@ -146,6 +174,9 @@ class App():
         button = self.builder.get_object("button_cance1")
         button.connect("button_press_event", self.hide_window)
         popup.show()
+        save = self.builder.get_object("button_sa1")
+        data = 'material'
+        save.connect("button_press_event", self.save_popup, data)
         return
 
     def show_nradiologo(self, widget):
@@ -156,6 +187,9 @@ class App():
         button = self.builder.get_object("button_can")
         button.connect("button_press_event", self.hide_window)
         popup.show()
+        save = self.builder.get_object("button_")
+        data = 'radiologo'
+        save.connect("button_press_event", self.save_popup, data)
         return
 
     def show_nfactor(self, widget):
@@ -166,6 +200,9 @@ class App():
         button = self.builder.get_object("button_cance")
         button.connect("button_press_event", self.hide_window)
         popup.show()
+        save = self.builder.get_object("button_sa")
+        data = 'factor'
+        save.connect("button_press_event", self.save_popup, data)
         return
 
     def show_npatologia(self, widget):
@@ -176,6 +213,9 @@ class App():
         button = self.builder.get_object("button_canc")
         button.connect("button_press_event", self.hide_window)
         popup.show()
+        save = self.builder.get_object("button_s")
+        data = 'patologia'
+        save.connect("button_press_event", self.save_popup, data)
         return
 
     def show_ntprocedimiento(self, widget):
@@ -186,6 +226,121 @@ class App():
         button = self.builder.get_object("button_cance2")
         button.connect("button_press_event", self.hide_window)
         popup.show()
+        save = self.builder.get_object("button_sa2")
+        data = 'tprocedimiento'
+        save.connect("button_press_event", self.save_popup, data)
+        print('vuelvo')
+        return
+
+    def save_popup(self, event, widget, data):
+        if data == 'servicio':
+            try:
+                nombre = self.builder.get_object("entry1").get_text()
+                s = Servicio(0, nombre)
+                ServicioService.create(s)
+                self.builder.get_object("entry1").set_text("")
+                self.lista_servicios_model.append([s.id, s.nombre])
+            except TypeError:
+                alert = self.builder.get_object("windowerror")
+                alert.set_position(gtk.WIN_POS_CENTER)
+                alert.show()
+                self.builder.get_object("labelerror").set_text(str(sys.exc_info()[1]))
+                button_aceptar = self.builder.get_object("buttonerror")
+                button_aceptar.connect("button_press_event", self.hide_window)
+            popup = self.builder.get_object("new_servicio")
+            popup.hide()
+        if data == 'centro':
+            try:
+                nombre = self.builder.get_object("entry").get_text()
+                c = Centro(0, nombre)
+                CentroService.create(c)
+                self.builder.get_object("entry").set_text("")
+            except TypeError:
+                alert = self.builder.get_object("windowerror")
+                alert.set_position(gtk.WIN_POS_CENTER)
+                alert.show()
+                self.builder.get_object("labelerror").set_text(str(sys.exc_info()[1]))
+                button_aceptar = self.builder.get_object("buttonerror")
+                button_aceptar.connect("button_press_event", self.hide_window)
+            popup = self.builder.get_object("new_centro")
+            popup.hide()
+        if data == 'material':
+            try:
+                nombre = self.builder.get_object("entry3").get_text()
+                m = Material(0, nombre)
+                MaterialService.create(m)
+                self.builder.get_object("entry3").set_text("")
+            except TypeError:
+                alert = self.builder.get_object("windowerror")
+                alert.set_position(gtk.WIN_POS_CENTER)
+                alert.show()
+                self.builder.get_object("labelerror").set_text(str(sys.exc_info()[1]))
+                button_aceptar = self.builder.get_object("buttonerror")
+                button_aceptar.connect("button_press_event", self.hide_window)
+            popup = self.builder.get_object("new_material")
+            popup.hide()
+        if data == 'radiologo':
+            try:
+                nombre = self.builder.get_object("entry4").get_text()
+                r = Radiologo(0, nombre)
+                RadiologoService.create(r)
+                self.builder.get_object("entry4").set_text("")
+            except TypeError:
+                alert = self.builder.get_object("windowerror")
+                alert.set_position(gtk.WIN_POS_CENTER)
+                alert.show()
+                self.builder.get_object("labelerror").set_text(str(sys.exc_info()[1]))
+                button_aceptar = self.builder.get_object("buttonerror")
+                button_aceptar.connect("button_press_event", self.hide_window)
+            popup = self.builder.get_object("new_radiologo")
+            popup.hide()
+        if data == 'factor':
+            try:
+                nombre = self.builder.get_object("entry7").get_text()
+                f = Factor(0, nombre)
+                FactorService.create(f)
+                self.builder.get_object("entry7").set_text("")
+            except TypeError:
+                alert = self.builder.get_object("windowerror")
+                alert.set_position(gtk.WIN_POS_CENTER)
+                alert.show()
+                self.builder.get_object("labelerror").set_text(str(sys.exc_info()[1]))
+                button_aceptar = self.builder.get_object("buttonerror")
+                button_aceptar.connect("button_press_event", self.hide_window)
+            popup = self.builder.get_object("new_factor")
+            popup.hide()
+        if data == 'patologia':
+            try:
+                nombre = self.builder.get_object("entry6").get_text()
+                p = Patologia(0, nombre)
+                PatologiaService.create(p)
+                self.builder.get_object("entry6").set_text("")
+                self.lista_patologias_model.append([p.id, p.nombre])
+            except TypeError:
+                alert = self.builder.get_object("windowerror")
+                alert.set_position(gtk.WIN_POS_CENTER)
+                alert.show()
+                self.builder.get_object("labelerror").set_text(str(sys.exc_info()[1]))
+                button_aceptar = self.builder.get_object("buttonerror")
+                button_aceptar.connect("button_press_event", self.hide_window)
+            popup = self.builder.get_object("new_patologia")
+            popup.hide()
+        if data == 'tprocedimiento':
+            try:
+                nombre = self.builder.get_object("entry2").get_text()
+                tp = TipoProcedimiento(0, nombre)
+                TipoProcedimientoService.create(tp)
+                self.builder.get_object("entry2").set_text("")
+                self.lista_servicios_model.append([tp.id, tp.nombre])
+            except TypeError:
+                alert = self.builder.get_object("windowerror")
+                alert.set_position(gtk.WIN_POS_CENTER)
+                alert.show()
+                self.builder.get_object("labelerror").set_text(str(sys.exc_info()[1]))
+                button_aceptar = self.builder.get_object("buttonerror")
+                button_aceptar.connect("button_press_event", self.hide_window)
+            popup = self.builder.get_object("new_tipoprocedimiento")
+            popup.hide()
         return
 
     def __init__(self):
