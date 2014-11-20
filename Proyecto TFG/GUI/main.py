@@ -420,11 +420,31 @@ class App():
     def show_egenerales(self, event):
         return
 
+    def show_importar(self, event):
+        self.box_importar.set_position(gtk.WIN_POS_CENTER)
+        self.box_importar.show()
+        aceptar = self.builder.get_object("button15")
+        aceptar.get_image().show()
+        cancelar = self.builder.get_object("button14")
+        cancelar.get_image().show()
+        cancelar.connect("button_press_event", self.hide_window)
+        return
+
+    def show_exportar(self, event):
+        self.box_exportar.set_position(gtk.WIN_POS_CENTER)
+        self.box_exportar.show()
+        aceptar = self.builder.get_object("button12")
+        aceptar.get_image().show()
+        cancelar = self.builder.get_object("button11")
+        cancelar.get_image().show()
+        cancelar.connect("button_press_event", self.hide_window)
+        return
+
     def __init__(self):
         self.builder = gtk.Builder()
         self.builder.add_from_file("gui - ejecutable.glade")
         self.window = self.builder.get_object("vistabasica")
-        self.window.set_size_request(800, 600)
+        self.window.set_size_request(900, 600)
         self.window.connect("delete_event", self.delete_event)
         self.window.connect("destroy", self.destroy)
         self.window.set_position(gtk.WIN_POS_CENTER)
@@ -435,6 +455,8 @@ class App():
         self.box_home = self.builder.get_object("boxhome")
         self.box_datos_paciente = self.builder.get_object("boxdatospaciente")
         self.box_epatologia = self.builder.get_object("table12")
+        self.box_exportar = self.builder.get_object("exportarbd")
+        self.box_importar = self.builder.get_object("importarbd")
         self.container.pack_start(self.box_home)
 
         #conexiones del menu
@@ -459,6 +481,10 @@ class App():
         menu_item_egenerales = self.builder.get_object("estadisticasgenerales")
         menu_item_egenerales.connect("activate", self.show_egenerales)
         #DATOS
+        menu_item_exportar = self.builder.get_object("exportarb")
+        menu_item_exportar.connect("activate", self.show_exportar)
+        menu_item_importar = self.builder.get_object("importarb")
+        menu_item_importar.connect("activate", self.show_importar)
 
         #rellenado del tree con los pacientes
         self.tree = self.builder.get_object("treeview8")
