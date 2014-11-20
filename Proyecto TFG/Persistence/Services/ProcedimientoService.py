@@ -26,8 +26,6 @@ def create(procedimiento):
 
 
 def update(procedimiento):
-    if procedimiento.nombre == "":
-        raise TypeError("El nombre no puede estar en blanco")
     if not isinstance(procedimiento.id, int):
         raise TypeError("El id debe ser int")
     ProcedimientoRepository.update(procedimiento)
@@ -50,40 +48,30 @@ def get_tipoprocedimiento(procedimiento):
 
 
 def get_episodios(procedimiento):
-    if procedimiento.nombre == "":
-        raise TypeError("El nombre no puede estar en blanco")
     if not isinstance(procedimiento.id, int):
         raise TypeError("El id debe ser int")
     return ProcedimientoRepository.get_episodios(procedimiento)
 
 
 def get_imagenes(procedimiento):
-    if procedimiento.nombre == "":
-        raise TypeError("El nombre no puede estar en blanco")
     if not isinstance(procedimiento.id, int):
         raise TypeError("El id debe ser int")
     return ProcedimientoRepository.get_imagenes(procedimiento)
 
 
 def get_documentos(procedimiento):
-    if procedimiento.nombre == "":
-        raise TypeError("El nombre no puede estar en blanco")
     if not isinstance(procedimiento.id, int):
         raise TypeError("El id debe ser int")
     return ProcedimientoRepository.get_documentos(procedimiento)
 
 
 def get_materiales(procedimiento):
-    if procedimiento.nombre == "":
-        raise TypeError("El nombre no puede estar en blanco")
     if not isinstance(procedimiento.id, int):
         raise TypeError("El id debe ser int")
     return ProcedimientoRepository.get_materiales(procedimiento)
 
 
 def get_complicaciones(procedimiento):
-    if procedimiento.nombre == "":
-        raise TypeError("El nombre no puede estar en blanco")
     if not isinstance(procedimiento.id, int):
         raise TypeError("El id debe ser int")
     return ProcedimientoRepository.get_complicaciones(procedimiento)
