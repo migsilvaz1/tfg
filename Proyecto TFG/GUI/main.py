@@ -422,8 +422,29 @@ class App():
         tree_curados_procedimiento.set_model(tree_curados_model)
 
         #buttons
-        self.builder.get_object("button19").get_image().show()
-        self.builder.get_object("button_save1").get_image().show()
+        inicio = self.builder.get_object("button19")
+        inicio.get_image().show()
+        inicio.connect("button_press_event", self.go_home)
+        imprimir = self.builder.get_object("button_save1")
+        imprimir.get_image().show()
+        return
+
+    def go_home(self, event, widget):
+        self.tree.remove_column(self.tree.get_columns()[0])
+        cellid = gtk.CellRendererText()
+        cellid.set_visible(False)
+        cellnh = gtk.CellRendererText()
+        col1 = gtk.TreeViewColumn("Numero Historial", cellnh)
+        col1.add_attribute(cellnh, 'text', 1)
+        celln = gtk.CellRendererText()
+        col2 = gtk.TreeViewColumn("Nombre", celln)
+        col2.add_attribute(celln, 'text', 2)
+        self.tree.append_column(col1)
+        self.tree.append_column(col2)
+        self.tree.set_model(self.tree_model)
+        self.create_tree_pacientes()
+        self.container.remove(self.container.get_children()[2])
+        self.container.pack_start(self.box_home)
         return
 
     def show_egenerales(self, event):
@@ -501,6 +522,7 @@ class App():
         tree_procedimientos.set_model(tree_procedimientos_model)
         for elem in EpisodioService.get_procedimientos(episodio):
             tree_procedimientos_model.append(None, [elem.id, ProcedimientoService.get_tipoprocedimiento(elem).nombre])
+        tree_procedimientos.connect("row-activated", self.datos_procedimiento)
 
         tree_pdiag = self.builder.get_object("treeview17")
         tree_pdiag_model = gtk.TreeStore(int, str)
@@ -522,8 +544,11 @@ class App():
         self.builder.get_object("buttonerror3").get_image().show()
         self.builder.get_object("buttonerror4").get_image().show()
         self.builder.get_object("buttonerror2").get_image().show()
+        return
 
-
+    def datos_procedimiento(self, widget, event, data):
+        self.container.remove(self.container.get_children()[2])
+        self.container.pack_start(self.box_procedimiento)
         return
 
     def __init__(self):
@@ -544,6 +569,7 @@ class App():
         self.box_exportar = self.builder.get_object("exportarbd")
         self.box_importar = self.builder.get_object("importarbd")
         self.box_episodio = self.builder.get_object("table3")
+        self.box_procedimiento = self.builder.get_object("")
         self.container.pack_start(self.box_home)
 
         #conexiones del menu
