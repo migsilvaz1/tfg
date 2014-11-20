@@ -5,7 +5,8 @@ import gtk
 import gtk.glade
 from Persistence.Services import PacienteService, ServicioService, PatologiaService, EpisodioService, \
     ProcedimientoService, TipoProcedimientoService, RelationsService, CentroService, ComplicacionService, \
-    DiagnosticoService, EvolucionService, FactorService, MaterialService, PruebaDiagnosticaService, RadiologoService
+    DiagnosticoService, EvolucionService, FactorService, MaterialService, PruebaDiagnosticaService, RadiologoService, \
+    QuerysService
 from Persistence.Domain.Paciente import Paciente
 from Persistence.Domain.Episodio import Episodio
 from Persistence.Domain.Procedimiento import Procedimiento
@@ -78,8 +79,8 @@ class App():
         self.lista_servicios.set_active(-1)
         self.lista_patologias.set_active(-1)
         self.lista_tprocedimientos.set_active(-1)
-        self.box_home.show()
-        self.box_datos_paciente.hide()
+        self.container.remove(self.box_datos_paciente)
+        self.container.pack_start(self.box_home)
         return
 
     def guardar_home(self, event, widget):
@@ -116,8 +117,8 @@ class App():
         return
 
     def datos_paciente(self, widget, event, data):
-        self.box_home.hide()
-        self.box_datos_paciente.show()
+        self.container.remove(self.box_home)
+        self.container.pack_start(self.box_datos_paciente)
         inicio = self.builder.get_object("homedatospaciente")
         inicio.get_image().show()
         inicio.connect("button_press_event", self.datospaciente_to_home)
@@ -367,6 +368,58 @@ class App():
             popup.hide()
         return
 
+    def show_epatologias(self, event):
+        tree_listapatologias_model = gtk.TreeStore(int, str)
+        cellid = gtk.CellRendererText()
+        cellid.set_visible(False)
+        celln = gtk.CellRendererText()
+        col1 = gtk.TreeViewColumn("Nombre", celln)
+        col1.add_attribute(celln, 'text', 1)
+        self.tree.remove_column(self.tree.get_columns()[0])
+        self.tree.remove_column(self.tree.get_columns()[0])
+        self.tree.append_column(col1)
+        patologias = PatologiaService.get_all()
+        for elem in patologias:
+            tree_listapatologias_model.append(None, [elem.id, elem.nombre])
+        self.tree.set_model(tree_listapatologias_model)
+        self.container.remove(self.container.get_children()[2])
+        self.container.pack_start(self.box_epatologia)
+
+        #Labels
+        p = PatologiaService.get_by_id(1)
+        self.builder.get_object("label129").set_text(p.nombre)
+        self.builder.get_object("label108").set_text(str(QuerysService.porcentaje_complicaciones_patologia(p)))
+        self.builder.get_object("label111").set_text(str(QuerysService.pacientes_factores_patologia(p)))
+        self.builder.get_object("label113").set_text(str(QuerysService.edad_media_pacientes_patologia(p)))
+        self.builder.get_object("label122").set_text(str(QuerysService.sexo_patologia(p, 'H')))
+        self.builder.get_object("label124").set_text(str(QuerysService.sexo_patologia(p, 'M')))
+        self.builder.get_object("label126").set_text(str(QuerysService.mortalidad_temprana_patologia(p)))
+        #Tree de procedimientos
+        tree_curados_procedimiento = self.builder.get_object("treeview18")
+        tree_curados_model = gtk.TreeStore(str, int)
+        cellprocedimiento = gtk.CellRendererText()
+        col1 = gtk.TreeViewColumn("Procedimiento", cellprocedimiento)
+        col1.add_attribute(cellprocedimiento, 'text', 0)
+        celln = gtk.CellRendererText()
+        col2 = gtk.TreeViewColumn("Pacientes Curados", celln)
+        col2.add_attribute(celln, 'text', 1)
+        tree_curados_procedimiento.append_column(col1)
+        tree_curados_procedimiento.append_column(col2)
+        procedimientos = ProcedimientoService.get_all()
+        for elem in procedimientos:
+            tipop = TipoProcedimientoService.get_by_id(elem.idtipop)
+            curados = QuerysService.curacion_patologia_procedimiento(p, tipop)
+            tree_curados_model.append(None, [tipop.nombre, curados])
+        tree_curados_procedimiento.set_model(tree_curados_model)
+
+        #buttons
+        self.builder.get_object("button19").get_image().show()
+        self.builder.get_object("button_save1").get_image().show()
+        return
+
+    def show_egenerales(self, event):
+        return
+
     def __init__(self):
         self.builder = gtk.Builder()
         self.builder.add_from_file("gui - ejecutable.glade")
@@ -377,17 +430,15 @@ class App():
         self.window.set_position(gtk.WIN_POS_CENTER)
         self.window.show()
 
-        #boxs
+        #boxes
         self.container = self.builder.get_object("hbox20")
         self.box_home = self.builder.get_object("boxhome")
         self.box_datos_paciente = self.builder.get_object("boxdatospaciente")
-
-        #empaquetados
+        self.box_epatologia = self.builder.get_object("table12")
         self.container.pack_start(self.box_home)
-        self.container.pack_start(self.box_datos_paciente)
-        self.box_datos_paciente.hide()
 
         #conexiones del menu
+        #CREAR
         menu_item_nuevoservicio = self.builder.get_object("nuevoservicio")
         menu_item_nuevoservicio.connect("activate", self.show_nservicio)
         menu_item_nuevocentro = self.builder.get_object("nuevocentro")
@@ -402,6 +453,12 @@ class App():
         menu_item_nuevapatologia.connect("activate", self.show_npatologia)
         menu_item_nuevotipoprocedimiento = self.builder.get_object("nuevotipoprocedimiento")
         menu_item_nuevotipoprocedimiento.connect("activate", self.show_ntprocedimiento)
+        #ESTADISTICAS
+        menu_item_epatologias = self.builder.get_object("estadisticaspatologias")
+        menu_item_epatologias.connect("activate", self.show_epatologias)
+        menu_item_egenerales = self.builder.get_object("estadisticasgenerales")
+        menu_item_egenerales.connect("activate", self.show_egenerales)
+        #DATOS
 
         #rellenado del tree con los pacientes
         self.tree = self.builder.get_object("treeview8")
