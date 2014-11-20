@@ -511,18 +511,17 @@ class App():
         lista_patologias.set_attributes(cell, text=1)
         lista_patologias.connect('changed', self.changed_cb_patologia)
 
-        tree_procedimientos = self.builder.get_object("treeview14")
-        tree_procedimientos_model = gtk.TreeStore(int, str)
+
         cellid_procedimientos = gtk.CellRendererText()
         cellid_procedimientos.set_visible(False)
         celln_procedimientos = gtk.CellRendererText()
         col1_procedimientos = gtk.TreeViewColumn("Nombre", celln_procedimientos)
         col1_procedimientos.add_attribute(celln_procedimientos, 'text', 1)
-        tree_procedimientos.append_column(col1_procedimientos)
-        tree_procedimientos.set_model(tree_procedimientos_model)
+        self.tree_procedimientos.append_column(col1_procedimientos)
+        self.tree_procedimientos.set_model(self.tree_procedimientos_model)
         for elem in EpisodioService.get_procedimientos(episodio):
-            tree_procedimientos_model.append(None, [elem.id, ProcedimientoService.get_tipoprocedimiento(elem).nombre])
-        tree_procedimientos.connect("row-activated", self.datos_procedimiento)
+            self.tree_procedimientos_model.append(None, [elem.id, ProcedimientoService.get_tipoprocedimiento(elem).nombre])
+        self.tree_procedimientos.connect("row-activated", self.datos_procedimiento)
 
         tree_pdiag = self.builder.get_object("treeview17")
         tree_pdiag_model = gtk.TreeStore(int, str)
@@ -549,6 +548,65 @@ class App():
     def datos_procedimiento(self, widget, event, data):
         self.container.remove(self.container.get_children()[2])
         self.container.pack_start(self.box_procedimiento)
+        iterador = self.tree_procedimientos.get_selection().get_selected()[1]
+        prod_id = self.tree_procedimientos_model.get_value(iterador, 0)
+        procedimiento = ProcedimientoService.get_by_id(prod_id)
+
+        #treematerial
+        tree_material = self.builder.get_object("treeview1")
+        tree_material_model = gtk.TreeStore(int, str)
+        cellid = gtk.CellRendererText()
+        cellid.set_visible(False)
+        celln_m = gtk.CellRendererText()
+        col = gtk.TreeViewColumn("Nombre", celln_m)
+        col.add_attribute(celln_m, 'text', 1)
+        tree_material.append_column(col)
+        tree_material.set_model(tree_material_model)
+        for elem in ProcedimientoService.get_materiales(procedimiento):
+            tree_material_model.append(None, [elem.id, elem.nombre])
+
+        #treecomplicaciones
+        tree_comp = self.builder.get_object("treeview2")
+        tree_comp_model = gtk.TreeStore(int, str)
+        cellid = gtk.CellRendererText()
+        cellid.set_visible(False)
+        celln_c = gtk.CellRendererText()
+        col = gtk.TreeViewColumn("Nombre", celln_c)
+        col.add_attribute(celln_c, 'text', 1)
+        tree_comp.append_column(col)
+        tree_comp.set_model(tree_comp_model)
+        for elem in ProcedimientoService.get_complicaciones(procedimiento):
+            tree_comp_model.append(None, [elem.id, elem.nombre])
+
+        #comboboxtipoprod
+        tprocedimientos = TipoProcedimientoService.get_all()
+        lista_tprocedimientos = self.builder.get_object('combobox5')
+        lista_tprocedimientos_model = gtk.ListStore(int, str)
+        for elem in tprocedimientos:
+            lista_tprocedimientos_model.append([elem.id, elem.nombre])
+        cell = gtk.CellRendererText()
+        lista_tprocedimientos.set_model(lista_tprocedimientos_model)
+        lista_tprocedimientos.pack_start(cell)
+        lista_tprocedimientos.set_attributes(cell, text=1)
+        lista_tprocedimientos.connect('changed', self.changed_cb_tipoprocedimiento)
+        resultado_evolucion = self.builder.get_object("entry10").set_text(EvolucionService.get_by_id(procedimiento.idevolucion).resultado)
+        notas_evolucion = self.builder.get_object("entry12").set_text(EvolucionService.get_by_id(procedimiento.idevolucion).notas)
+        anadir_material = self.builder.get_object("button16")
+        anadir_material.get_image().show()
+        eliminar_material = self.builder.get_object("button20")
+        eliminar_material.get_image().show()
+        anadir_complicacion = self.builder.get_object("button21")
+        anadir_complicacion.get_image().show()
+        eliminar_complicacion = self.builder.get_object("button22")
+        eliminar_complicacion.get_image().show()
+        anadir_imagen = self.builder.get_object("button23")
+        anadir_imagen.get_image().show()
+        eliminar = self.builder.get_object("button24")
+        eliminar.get_image().show()
+        guardar = self.builder.get_object("button3")
+        guardar.get_image().show()
+        inicio = self.builder.get_object("button4")
+        inicio.get_image().show()
         return
 
     def __init__(self):
@@ -569,7 +627,7 @@ class App():
         self.box_exportar = self.builder.get_object("exportarbd")
         self.box_importar = self.builder.get_object("importarbd")
         self.box_episodio = self.builder.get_object("table3")
-        self.box_procedimiento = self.builder.get_object("")
+        self.box_procedimiento = self.builder.get_object("table1")
         self.container.pack_start(self.box_home)
 
         #conexiones del menu
@@ -684,6 +742,10 @@ class App():
 
         #Ver datos episodio
         self.tree_episodios.connect("row-activated", self.datos_episodio)
+
+        #tree procedimientos
+        self.tree_procedimientos = self.builder.get_object("treeview14")
+        self.tree_procedimientos_model = gtk.TreeStore(int, str)
 
 
 if __name__ == "__main__":
