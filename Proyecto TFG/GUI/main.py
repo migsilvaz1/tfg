@@ -27,6 +27,7 @@ combo_value_servicio_id = -1
 combo_value_patologia_id = -1
 combo_value_centro_id = -1
 combo_value_tipoprocedimiento_id = -1
+combo_value_radiologo_id = -1
 
 
 class App():
@@ -71,6 +72,13 @@ class App():
         index = combobox.get_active()
         model = combobox.get_model()
         combo_value_tipoprocedimiento_id = model[index][0]
+        return
+
+    def changed_cb_radiologo(self, combobox):
+        global combo_value_radiologo_id
+        index = combobox.get_active()
+        model = combobox.get_model()
+        combo_value_radiologo_id = model[index][0]
         return
 
     def hide_window(self, widget, event):
@@ -523,17 +531,16 @@ class App():
             self.tree_procedimientos_model.append(None, [elem.id, ProcedimientoService.get_tipoprocedimiento(elem).nombre])
         self.tree_procedimientos.connect("row-activated", self.datos_procedimiento)
 
-        tree_pdiag = self.builder.get_object("treeview17")
-        tree_pdiag_model = gtk.TreeStore(int, str)
         cellid_pdiag = gtk.CellRendererText()
         cellid_pdiag.set_visible(False)
         celln_pdiag = gtk.CellRendererText()
         col1_pdiag = gtk.TreeViewColumn("Nombre", celln_pdiag)
         col1_pdiag.add_attribute(celln_pdiag, 'text', 1)
-        tree_pdiag.append_column(col1_pdiag)
-        tree_pdiag.set_model(tree_pdiag_model)
+        self.tree_pdiag.append_column(col1_pdiag)
+        self.tree_pdiag.set_model(self.tree_pdiag_model)
         for elem in EpisodioService.get_pruebas(episodio):
-            tree_pdiag_model.append(None, [elem.id, elem.nombre])
+            self.tree_pdiag_model.append(None, [elem.id, elem.nombre])
+        self.tree_pdiag.connect("row-activated", self.datos_pdiag)
 
         #Inicializado de atributos
         self.builder.get_object("entry8").set_text(episodio.nombre)
@@ -589,6 +596,7 @@ class App():
         lista_tprocedimientos.pack_start(cell)
         lista_tprocedimientos.set_attributes(cell, text=1)
         lista_tprocedimientos.connect('changed', self.changed_cb_tipoprocedimiento)
+
         resultado_evolucion = self.builder.get_object("entry10").set_text(EvolucionService.get_by_id(procedimiento.idevolucion).resultado)
         notas_evolucion = self.builder.get_object("entry12").set_text(EvolucionService.get_by_id(procedimiento.idevolucion).notas)
         anadir_material = self.builder.get_object("button16")
@@ -607,6 +615,39 @@ class App():
         guardar.get_image().show()
         inicio = self.builder.get_object("button4")
         inicio.get_image().show()
+        return
+
+    def datos_pdiag(self, widget, event, data):
+        self.container.remove(self.container.get_children()[2])
+        self.container.pack_start(self.box_pdiag)
+        iterador = self.tree_pdiag.get_selection().get_selected()[1]
+        p_id = self.tree_pdiag_model.get_value(iterador, 0)
+        pdiag = PruebaDiagnosticaService.get_by_id(p_id)
+        #combobox
+        radiologos = RadiologoService.get_all()
+        lista_radiologos = self.builder.get_object('combobox7')
+        lista_radiologos_model = gtk.ListStore(int, str)
+        for elem in radiologos:
+            lista_radiologos_model.append([elem.id, elem.nombre])
+        cell = gtk.CellRendererText()
+        lista_radiologos.set_model(lista_radiologos_model)
+        lista_radiologos.pack_start(cell)
+        lista_radiologos.set_attributes(cell, text=1)
+        lista_radiologos.connect('changed', self.changed_cb_radiologo)
+
+        #valores
+        imagenes = self.builder.get_object("treeview10")
+        self.builder.get_object("entry13").set_text(pdiag.nombre)
+        eliminar = self.builder.get_object("button26")
+        eliminar.get_image().show()
+        editar = self.builder.get_object("button25")
+        editar.get_image().show()
+        anadir = self.builder.get_object("button27")
+        anadir.get_image().show()
+        inicio = self.builder.get_object("button30")
+        inicio.get_image().show()
+        guardar = self.builder.get_object("button28")
+        guardar.get_image().show()
         return
 
     def __init__(self):
@@ -628,6 +669,7 @@ class App():
         self.box_importar = self.builder.get_object("importarbd")
         self.box_episodio = self.builder.get_object("table3")
         self.box_procedimiento = self.builder.get_object("table1")
+        self.box_pdiag = self.builder.get_object("table14")
         self.container.pack_start(self.box_home)
 
         #conexiones del menu
@@ -746,6 +788,8 @@ class App():
         #tree procedimientos
         self.tree_procedimientos = self.builder.get_object("treeview14")
         self.tree_procedimientos_model = gtk.TreeStore(int, str)
+        self.tree_pdiag = self.builder.get_object("treeview17")
+        self.tree_pdiag_model = gtk.TreeStore(int, str)
 
 
 if __name__ == "__main__":
