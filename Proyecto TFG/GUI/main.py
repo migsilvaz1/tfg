@@ -25,6 +25,7 @@ from Persistence.Domain.TipoProcedimiento import TipoProcedimiento
 
 combo_value_servicio_id = -1
 combo_value_patologia_id = -1
+combo_value_centro_id = -1
 combo_value_tipoprocedimiento_id = -1
 
 
@@ -56,6 +57,13 @@ class App():
         index = combobox.get_active()
         model = combobox.get_model()
         combo_value_patologia_id = model[index][0]
+        return
+
+    def changed_cb_centro(self, combobox):
+        global combo_value_centro_id
+        index = combobox.get_active()
+        model = combobox.get_model()
+        combo_value_centro_id = model[index][0]
         return
 
     def changed_cb_tipoprocedimiento(self, combobox):
@@ -117,7 +125,7 @@ class App():
         return
 
     def datos_paciente(self, widget, event, data):
-        self.container.remove(self.box_home)
+        self.container.remove(self.container.get_children()[2])
         self.container.pack_start(self.box_datos_paciente)
         inicio = self.builder.get_object("homedatospaciente")
         inicio.get_image().show()
@@ -143,6 +151,7 @@ class App():
             self.tree_episodios_model.append(None, [elem.id, elem.nombre])
         self.builder.get_object("anadirfactordatospaciente").get_image().show()
         self.builder.get_object("quitarfactordatospaciente").get_image().show()
+        self.builder.get_object("buttonsave5").get_image().show()
 
     def show_nservicio(self, widget):
         popup = self.builder.get_object("new_servicio")
@@ -440,6 +449,83 @@ class App():
         cancelar.connect("button_press_event", self.hide_window)
         return
 
+    def datos_episodio(self, widget, event, data):
+        self.container.remove(self.container.get_children()[2])
+        self.container.pack_start(self.box_episodio)
+        iterador = self.tree_episodios.get_selection().get_selected()[1]
+        episodio_id = self.tree_episodios_model.get_value(iterador, 0)
+        episodio = EpisodioService.get_by_id(episodio_id)
+
+        #comboboxes
+        centros = CentroService.get_all()
+        lista_centros = self.builder.get_object('combobox6')
+        lista_centros_model = gtk.ListStore(int, str)
+        for elem in centros:
+            lista_centros_model.append([elem.id, elem.nombre])
+        cell = gtk.CellRendererText()
+        lista_centros.set_model(lista_centros_model)
+        lista_centros.pack_start(cell)
+        lista_centros.set_attributes(cell, text=1)
+        lista_centros.connect('changed', self.changed_cb_centro)
+
+        servicios = ServicioService.get_all()
+        lista_servicios = self.builder.get_object('combobox1')
+        lista_servicios_model = gtk.ListStore(int, str)
+        for elem in servicios:
+            lista_servicios_model.append([elem.id, elem.nombre])
+        cell = gtk.CellRendererText()
+        lista_servicios.set_model(lista_servicios_model)
+        lista_servicios.pack_start(cell)
+        lista_servicios.set_attributes(cell, text=1)
+        lista_servicios.connect('changed', self.changed_cb_servicio)
+
+        patologias = PatologiaService.get_all()
+        lista_patologias = self.builder.get_object('combobox4')
+        lista_patologias_model = gtk.ListStore(int, str)
+        for elem in patologias:
+            lista_patologias_model.append([elem.id, elem.nombre])
+        cell = gtk.CellRendererText()
+        lista_patologias.set_model(lista_patologias_model)
+        lista_patologias.pack_start(cell)
+        lista_patologias.set_attributes(cell, text=1)
+        lista_patologias.connect('changed', self.changed_cb_patologia)
+
+        tree_procedimientos = self.builder.get_object("treeview14")
+        tree_procedimientos_model = gtk.TreeStore(int, str)
+        cellid_procedimientos = gtk.CellRendererText()
+        cellid_procedimientos.set_visible(False)
+        celln_procedimientos = gtk.CellRendererText()
+        col1_procedimientos = gtk.TreeViewColumn("Nombre", celln_procedimientos)
+        col1_procedimientos.add_attribute(celln_procedimientos, 'text', 1)
+        tree_procedimientos.append_column(col1_procedimientos)
+        tree_procedimientos.set_model(tree_procedimientos_model)
+        for elem in EpisodioService.get_procedimientos(episodio):
+            tree_procedimientos_model.append(None, [elem.id, ProcedimientoService.get_tipoprocedimiento(elem).nombre])
+
+        tree_pdiag = self.builder.get_object("treeview17")
+        tree_pdiag_model = gtk.TreeStore(int, str)
+        cellid_pdiag = gtk.CellRendererText()
+        cellid_pdiag.set_visible(False)
+        celln_pdiag = gtk.CellRendererText()
+        col1_pdiag = gtk.TreeViewColumn("Nombre", celln_pdiag)
+        col1_pdiag.add_attribute(celln_pdiag, 'text', 1)
+        tree_pdiag.append_column(col1_pdiag)
+        tree_pdiag.set_model(tree_pdiag_model)
+        for elem in EpisodioService.get_pruebas(episodio):
+            tree_pdiag_model.append(None, [elem.id, elem.nombre])
+
+        #Inicializado de atributos
+        self.builder.get_object("entry8").set_text(episodio.nombre)
+        self.builder.get_object("entry9").set_text(str(episodio.fecha))
+        self.builder.get_object("entry11").set_text(EpisodioService.get_diagnosticos(episodio)[0].nombre)
+        self.builder.get_object("buttonerror1").get_image().show()
+        self.builder.get_object("buttonerror3").get_image().show()
+        self.builder.get_object("buttonerror4").get_image().show()
+        self.builder.get_object("buttonerror2").get_image().show()
+
+
+        return
+
     def __init__(self):
         self.builder = gtk.Builder()
         self.builder.add_from_file("gui - ejecutable.glade")
@@ -457,6 +543,7 @@ class App():
         self.box_epatologia = self.builder.get_object("table12")
         self.box_exportar = self.builder.get_object("exportarbd")
         self.box_importar = self.builder.get_object("importarbd")
+        self.box_episodio = self.builder.get_object("table3")
         self.container.pack_start(self.box_home)
 
         #conexiones del menu
@@ -568,6 +655,9 @@ class App():
         col1_episodios.add_attribute(cellnh_episodios, 'text', 1)
         self.tree_episodios.append_column(col1_episodios)
         self.tree_episodios.set_model(self.tree_episodios_model)
+
+        #Ver datos episodio
+        self.tree_episodios.connect("row-activated", self.datos_episodio)
 
 
 if __name__ == "__main__":
